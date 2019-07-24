@@ -7,6 +7,12 @@
 #include <vector>
 #include <string>
 
+//runtime: O(n)
+// space: O(n)
+// approach: traverse tree in : left->root->right order
+// from leaf return leaf value and add that to a vector. at root add root value to every element in vector and return vector.
+// in the end, sum all the values returned.
+
 using namespace std;
 
 struct TreeNode {
