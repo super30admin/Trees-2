@@ -1,12 +1,13 @@
 /**
- * Time Complexity: O(n^2)
- * Space Complexity : O(1) - no extra space
+ * Time Complexity: O(n)
+ * Space Complexity : O(n) - an extra map to store items
+ * Leetcode: Yes
  * Idea:
  * 1. Get data from preorder to create new node. 
- * 2. search for data in inorder array and left part of inorder array becomes left subtree and right part becomes right subtree
+ * 2. search for data in inorder array using a map and left part of inorder array becomes left subtree and right part becomes right subtree
  * 3. return root
  */
-
+import java.util.*;
 class InorderPostorderToBST {
 
     public class TreeNode {
@@ -17,47 +18,28 @@ class InorderPostorderToBST {
          }
     
     
-    public int findInInorder(int data, int[] inorder){
-
-        for(int i=0;i<inorder.length;i++){
-            if(inorder[i] == data)
-                return i;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
         }
-        return -1;
-    }
-
-    static int postorderIndex=Integer.MAX_VALUE;
-    // int preorderIndex = 0;
-    public TreeNode buildTreeHelper(int[] postorder, int[] inorder, int inorderStart, int inorderEnd){
-
-        if(inorderStart > inorderEnd)
-            return null;
+        return helper(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1, map);
         
-        // create node from postorder
-        int data = postorder[postorderIndex];
-        postorderIndex--;
-        TreeNode newNode = new TreeNode(data);
-
-        // no children
-        if(inorderStart == inorderEnd) return newNode;
-        
-        //search in inorder to find index
-        int inorderIndex = findInInorder(data, inorder);
-
-
-        //node.left -> left side in inorder
-        newNode.left = buildTreeHelper(postorder, inorder, inorderStart, inorderIndex-1);
-
-        //node.right -> right side in inorder
-
-        newNode.right = buildTreeHelper(postorder, inorder, inorderIndex+1, inorderEnd);
-
-        return newNode;
-
     }
-    public TreeNode buildTree(int[] postorder, int[] inorder) {
-                
-        TreeNode root = buildTreeHelper(postorder, inorder, 0, inorder.length-1);
+    
+    public TreeNode helper(int[] inorder, int inStart,int inEnd, int[] postorder, int postStart, int postEnd, HashMap<Integer,Integer> map){
+        //Base Case
+        if(inStart > inEnd || postStart > postEnd) return null;
+        int rootVal = postorder[postEnd];
+        int rootIdx = map.get(rootVal);
+        TreeNode root = new TreeNode(rootVal);
+        // formula 
+        int postOrderIndexFromFormula = postStart+rootIdx-inStart -1;
+        TreeNode rootLeft = helper(inorder, inStart, rootIdx-1, postorder, postStart, postOrderIndexFromFormula, map);
+        TreeNode rootRight = helper(inorder, rootIdx+1, inEnd, postorder, postOrderIndexFromFormula+1, postEnd - 1,map);
+        root.left = rootLeft;
+        root.right = rootRight;
         return root;
     }
 
@@ -77,8 +59,7 @@ class InorderPostorderToBST {
         InorderPostorderToBST obj = new InorderPostorderToBST();
         int[] postorder = {9,15,7,20,3};
         int[] inorder = {9,3,15,20,7};
-        postorderIndex = postorder.length-1;
-        TreeNode root = obj.buildTree(postorder, inorder);
+        TreeNode root = obj.buildTree(inorder, postorder);
         obj.printInorderTraversal(root);
     }
 }
