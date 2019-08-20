@@ -15,6 +15,21 @@ class SumRootToLeaf {
              TreeNode(int x) { val = x; }
         }
 
+        /**rev */
+        public int helper(TreeNode root, int currSum){
+            
+            if(root == null) return 0;
+            
+            currSum = currSum * 10 + root.val;
+
+            if(root.right == null && root.left == null) return currSum;
+
+            return helper(root.left, currSum) + helper(root.right, currSum);
+        }
+        public int findSum(TreeNode root){
+            return helper(root, 0);
+        }
+        /**rev */
     public int sumNumbersHelper(TreeNode root, int sumSoFar){
         // base
         if(root == null) return 0;
@@ -38,6 +53,7 @@ class SumRootToLeaf {
         tree.right.left = new TreeNode(15);
         tree.right.right = new TreeNode(7);
 
-        System.out.println(obj.sumNumbers(tree));
+        //System.out.println(obj.sumNumbers(tree));
+        System.out.println(obj.findSum(tree));
     }
 }

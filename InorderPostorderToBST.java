@@ -43,6 +43,34 @@ class InorderPostorderToBST {
         return root;
     }
 
+    public TreeNode treeHelper(int[] inorder, int[] postorder, int inorderStart, int inorderEnd, int postorderStart, int postorderEnd, HashMap<Integer, Integer> map){
+        
+        
+        if(inorderStart > inorderEnd || postorderStart > postorderEnd) return null;
+
+        TreeNode newNode = new TreeNode(postorder[postorderEnd]);
+
+        int rootIndex = map.get(newNode.val);
+        int postorderStartFormula = postorderStart+rootIndex-inorderStart-1;
+        newNode.left = treeHelper(inorder, postorder, inorderStart, rootIndex-1, postorderStart, postorderStartFormula, map);
+        newNode.right = treeHelper(inorder, postorder, rootIndex+1, inorderEnd, postorderStartFormula+1, postorderEnd-1, map);
+        
+        return newNode;
+
+
+    }
+    public TreeNode inPostToBST(int[] inorder, int[] postorder){
+        
+        // put inorder to map
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0;i<inorder.length;i++){
+            map.put(inorder[i], i);
+        }
+
+       return treeHelper(inorder, postorder, 0, inorder.length-1, 0, postorder.length-1, map);
+        
+        //return null;
+    }
 
 
     public void printInorderTraversal(TreeNode root){
@@ -59,7 +87,8 @@ class InorderPostorderToBST {
         InorderPostorderToBST obj = new InorderPostorderToBST();
         int[] postorder = {9,15,7,20,3};
         int[] inorder = {9,3,15,20,7};
-        TreeNode root = obj.buildTree(inorder, postorder);
+        //TreeNode root = obj.buildTree(inorder, postorder);
+        TreeNode root = obj.inPostToBST(inorder, postorder);
         obj.printInorderTraversal(root);
     }
 }
