@@ -1,5 +1,5 @@
 //Time complexity: O(N) since the recursion will happen for the length of the tree.
-//Space Complexity:O(1)
+//Space Complexity:O(h) h is the height of the tree
 //In this problem, I'll use a helper function called findSum, which will return 0 if the node is null or return order multiplied with 10 + the value or will recursively call the same function for the left and the right part separately by passing the left and the right element as the root element and the order to be equal to order*10 +val and will return their sum. 
 //This code was executed successfully and got accepted in leetcode.
 
