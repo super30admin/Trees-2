@@ -1,5 +1,5 @@
 //Time complexity: O(N)
-//Space Complexity O(1)
+//Space Complexity O(h) h = height of the tree
 //Tried on leetcode accepted
 class Solution {
     
