@@ -1,0 +1,43 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ * Time complexity: O(n)
+ */
+class Solution {
+    
+    int sum = 0;
+    
+    public int sumNumbers(TreeNode root) {
+        
+        if (root == null) return 0;
+        String s="";
+        
+        return helper(root, s);
+        
+    }
+    
+    // we have to traverse all paths
+    // keep appending value to string until
+    // we reach leaf node. Once leaf node is reached
+    // conver string to integer & add it to sum
+    private Integer helper(TreeNode root, String s) {
+        // base case
+        if (root == null) return 0;
+        
+        s+= String.valueOf(root.val);
+        
+        helper(root.left, s);
+        helper(root.right, s);
+        
+         // leaf node - left & right should be null
+        if (root.left == null && root.right == null) {
+            sum = sum + Integer.parseInt(s);
+        }
+        return sum;
+    }
+}
