@@ -1,0 +1,75 @@
+/*
+
+Time Complexity: O(n)
+
+Leetcode: unsuccessful
+55 / 110 test cases passed.
+
+Approach:
+
+tried doing in order traversal and tracing back, with the help of stack and a string.
+I think I am missing something here.
+
+
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        
+        Stack<TreeNode> st = new Stack<>();
+        
+        String number="";
+        int sum=0;
+        
+        while(root!=null||st.size()>0)
+        {
+            
+            
+        while(root.left!=null)
+        {
+            // System.out.println(number+ "  and the sume is  "+sum);
+            st.push(root);
+            number=number+Integer.toString(root.val);
+            root=root.left;
+        }
+    //    st.push(root);
+        number=number+Integer.toString(root.val);
+              System.out.println(root.val + " and this is the number "+number);
+        if(root.right==null&&number.length()>0)
+        {
+            
+            sum+=Integer.parseInt(number);
+     //       number=number.substring(0,number.length()-1);
+            System.out.println(number+ "  and the sume is  "+sum);
+            
+        }
+        //root=st.pop();
+        while(st.size()>0&&root.right==null)
+        {
+            root=st.pop();
+            number=number.substring(0,number.length()-1);
+     //       System.out.println(root.val + " and this is the number "+number);
+        }
+        
+   //     st.push(root);
+   //      number=number.substring(0,number.length()-1);
+        root=root.right;
+        
+        }
+        
+    //    System.out.println( "  and the sume is  "+sum);
+        return sum;
+    }
+    
+ 
+}
