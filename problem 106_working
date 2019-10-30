@@ -1,0 +1,58 @@
+/*
+
+
+Time Complexity: O(n2)
+
+Leetcode: successful
+
+Approach:
+
+get left and right part of the inorder, preorder.
+by creating new arrays
+
+
+
+
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        
+        
+        if(postorder.length==0||inorder.length==0) return null;
+        
+        TreeNode root = new TreeNode(postorder[postorder.length-1]);
+        int i=0;
+        while(root.val!=inorder[i])
+        {
+            i++;
+        }
+        
+        
+        int [] postleft =Arrays.copyOfRange(postorder,0,i);
+        int [] postright =Arrays.copyOfRange(postorder,i,postorder.length-1);
+        int [] inleft =Arrays.copyOfRange(inorder,0,i);
+        int [] inright =Arrays.copyOfRange(inorder,i+1,inorder.length);
+        
+        
+        root.left=buildTree(inleft,postleft);
+        root.right=buildTree(inright,postright);
+        
+        return root;
+        
+        
+        
+        
+        
+    }
+}
