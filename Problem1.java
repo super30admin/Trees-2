@@ -20,8 +20,8 @@ postorder = [9,15,7,20,3] Return the following binary tree:
 
 // Time Complexity : O(n2) as there will be two traversals(first it iterate  over the list and second it will look for root in the list)
 // Space Complexity : O(n)
-// Did this code successfully run on Leetcode :No
-// Any problem you faced while coding this : No, but it didn;t run 
+// Did this code successfully run on Leetcode : Yes its running
+// Any problem you faced while coding this : Yes earlier, but its resolved now. 
 
 
 // Your code here along with comments explaining your approach
@@ -29,9 +29,10 @@ postorder = [9,15,7,20,3] Return the following binary tree:
 class Solution {
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         //Edge case
-        if(postorder == null || inorder == null || postorder.length == 0 || inorder.length == 0)
+        if(postorder == null || inorder == null || postorder.length == 0 || inorder.length == 0){
             return null;
-    }
+        }
+    
     TreeNode root = new TreeNode(postorder[postorder.length-1]);
     int index = -1;
     for(int i=0; i<postorder.length; i++){
@@ -40,11 +41,12 @@ class Solution {
             break;
         }
     }
-    int[] postLeft = Arrays.copyOfRange(postorder, 0, index);
-    int[] inLeft = Arrays.copyOfRange(inorder, 0, index);
-    int[] postRight = Arrays.copyOfRange(postorder, index, postorder.length-1);
-    int[] inRight = Arrays.copyOfRange(inorder, index+1, inorder.length);
-    root.left = buildTree(inLeft.postLeft);
-    root.right = buildTree(inRight.postRight);
+    int[] postleft = Arrays.copyOfRange(postorder, 0, index);
+    int[] inleft = Arrays.copyOfRange(inorder, 0, index);
+    int[] postright = Arrays.copyOfRange(postorder, index, postorder.length-1);
+    int[] inright = Arrays.copyOfRange(inorder, index+1, inorder.length);
+    root.left = buildTree(inleft,postleft);
+    root.right = buildTree(inright,postright);
     return root;
+}
 }
