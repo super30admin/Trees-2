@@ -21,7 +21,7 @@ postorder = [9,15,7,20,3] Return the following binary tree:
 // Time Complexity : O(n2) as there will be two traversals(first it iterate  over the list and second it will look for root in the list)
 // Space Complexity : O(n)
 // Did this code successfully run on Leetcode : Yes its running
-// Any problem you faced while coding this : Yes earlier, but its resolved now. 
+// Any problem you faced while coding this : Yes earlier. But its resolved now. 
 
 
 // Your code here along with comments explaining your approach
