@@ -1,27 +1,33 @@
 # Definition for a binary tree node.
-# class TreeNode:
+# class TreeNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
+#Accepted by leetcode
+#Time complexity - O(n) searching root value in inorder
+#Space complexity - O(n) asymtotically because we are using extra arrays inleft, inright, postleft, postright
 
-#This is O(n^2) solution as we are searching inrder array for the root
-
-class Solution:
-    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+class Solution(object):
+    def buildTree(self, inorder, postorder):
+        """
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
+        """
+        #Edge case
         if len(postorder) == 0:
-            return None
-        rootVal = postorder[-1]
-        rootidx = -1
-        for index, val in enumerate(inorder):
-            if val == rootVal:
-                rootidx = index
-        root = TreeNode(rootVal)
-        inleft = inorder[:rootidx]
-        inright = inorder[rootidx + 1:]
-        postleft = postorder[:rootidx]
-        postright = postorder[rootidx:len(postorder) - 1]
+            return None        
+        root = TreeNode(postorder[-1])
+        rootindx = -1
+        for i,val in enumerate(inorder):
+            if val == root.val:
+                rootindx = i
+        inleft = inorder[:rootindx]
+        inright = inorder[rootindx+1:]
+        postleft = postorder[:rootindx]
+        postright = postorder[rootindx:-1]
         root.left = self.buildTree(inleft, postleft)
         root.right = self.buildTree(inright, postright)
-        return root
+        return root            
