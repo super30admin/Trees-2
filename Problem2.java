@@ -10,7 +10,7 @@
 
 /**
 LeetCode SUbmitted : YES
-Time Complexity : O(2^N)
+Time Complexity : O(N^2)
 Space Complexity : O(K) // K number of unique paths from root to leaves
 
 The idea is to recursive find all the paths and then take sum of it. I think the more optimal way could be to store current sum of the parent node at each level of the tree so you dont traverse again from start. Sort of a Queues to store current parent
