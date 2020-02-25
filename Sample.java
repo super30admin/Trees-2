@@ -6,6 +6,43 @@
 
 // Your code here along with comments explaining your approach
 
+// Problem 1 105. Construct Binary Tree from Preorder and Inorder Traversal
+//optimised solution using a hashmap
+// Time complexity - O(n)
+// Space complexity - O(1)
+class Solution {
+    int preIdx = 0;
+    HashMap<Integer, Integer> map;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || preorder.length == 0){
+            return null;
+        }
+        map = new HashMap<>();
+        //save inorder node-indices in a map
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
+        }
+        
+        return helper(preorder, inorder, 0, inorder.length - 1);
+    }
+    
+    private TreeNode helper(int[] preorder, int[] inorder, int startIdx, int endIdx){
+        
+       if(startIdx > endIdx) return null;
+       
+        int currval = preorder[preIdx++];
+        TreeNode root = new TreeNode(currval);
+        int idx = map.get(currval);
+        
+        root.left = helper(preorder, inorder, startIdx, idx - 1);
+        root.right = helper(preorder, inorder, idx + 1,  endIdx);
+            
+        return root;
+    }
+    
+    
+}
+
 // Problem2 (https://leetcode.com/problems/sum-root-to-leaf-numbers/)
 
 // Approach 1: using BFS
