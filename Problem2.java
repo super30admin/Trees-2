@@ -2,6 +2,10 @@
 // Space Complexity : O(n)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
+/**
+ * Definition for a binary tree node. public class TreeNode { int val; TreeNode
+ * left; TreeNode right; TreeNode(int x) { val = x; } }
+ */
 class Solution {
     int res = 0;
 
@@ -10,7 +14,6 @@ class Solution {
             return 0;
         }
 
-        int sum = 0;
         returnSum(root, 0);
         return res;
 
@@ -18,12 +21,12 @@ class Solution {
 
     private void returnSum(TreeNode node, int rSum) {
 
-        if (node.left == null || node.right == null) {
+        if (node.left == null && node.right == null) {
             res += rSum * 10 + node.val;
             return;
         }
 
-        rSum += rSum * 10 + node.val;
+        rSum = rSum * 10 + node.val;
 
         if (node.left != null) {
             returnSum(node.left, rSum);
