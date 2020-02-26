@@ -5,3 +5,4 @@
 
 
 // Your code here along with comments explaining your approach
+//solutions are difficult to think right now.
