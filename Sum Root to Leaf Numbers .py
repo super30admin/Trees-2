@@ -10,7 +10,6 @@ class TreeNode:
 class Solution:
     def sum_Root_to_Leaf(self, root):
         return self.helper(root, 0)
-    
     def helper(self, root, value):
         # BASE CASE
         if root == None:
@@ -22,6 +21,26 @@ class Solution:
         root.left = self.helper(root.left, value*10 + root.key)
         root.right = self.helper(root.right, value*10 + root.key)
         return root.left + root.right
+    
+    
+    
+    # Recursive solution
+    # time: O(N)
+    # space: O(H) ,H: height of tree 
+    def sum_Root_to_Leaf(self, root):
+        stack = []
+        result = 0
+        stack.append((root, 0))
+        while stack != []:
+            tuplee = stack.pop()
+            root = tuplee[0]
+            value = tuplee[1]
+            if root != None:                                          # if node has 1 child
+                if root.left == None and root.right == None:            # leaf node
+                    result += value*10 + root.key 
+                stack.append((root.left, value*10 + root.key ))
+                stack.append((root.right, value*10 + root.key ))
+        return result
 
 
 
