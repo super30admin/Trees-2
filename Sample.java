@@ -48,7 +48,7 @@ class Solution {
         return node;
     }
 
-    // Time complexity: O(N) N is size of array
+    // Time complexity: O(N) N is number of nodes
     // Space complexity: O(H) H is the height of the tree
     // Did this code successfully run on Leetcode : Yes
 
