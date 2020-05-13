@@ -1,0 +1,63 @@
+// Time Complexity :O(n)
+// Space Complexity :O(h) h = height of tree
+// Did this code successfully run on Leetcode :Yes
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+class Solution {
+    func sumNumbers(_ root: TreeNode?) -> Int {
+        return helper(root, 0)
+    }
+    
+    private func helper(_ root: TreeNode?, _ sum: Int) -> Int {
+        guard let root = root else {
+            return 0
+        }
+        
+        let val = sum * 10 + root.val
+        
+        if root.left == nil && root.right == nil {
+            return val
+        }
+        
+        return helper(root.left, val) + helper(root.right, val)
+    }
+    
+    func sumNumbers_Stack(_ root: TreeNode?) -> Int {
+        guard let root = root else {
+            return 0
+        }
+        
+        var stack = [(node: root, nodeSum:root.val)]
+        var result = 0
+        
+        while !stack.isEmpty {
+            let item = stack.removeLast()
+            if item.node.left == nil && item.node.right == nil {
+                result += item.nodeSum
+            }
+            if let rightNode = item.node.right {
+                stack.append((node: rightNode, nodeSum: item.nodeSum * 10 + rightNode.val))
+            }
+            if let leftNode = item.node.left {
+                stack.append((node: leftNode, nodeSum: item.nodeSum * 10 + leftNode.val))
+            }
+        }
+        
+        return result
+    }
+}
