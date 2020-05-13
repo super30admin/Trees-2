@@ -44,7 +44,7 @@ class Solution:
 
 #Problem 2: Sum Root to Leaf Numbers
 #time complexity: O(n)
-#space complexity: O(h), h height of the tree
+#space complexity: O(h^2), h height of the tree and the strings
 #did it work on leetcode:yes
 '''
 brute force: Traverse each branch , by starting from the root each time
