@@ -1,0 +1,66 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+class Solution {
+    
+    /* recrusive approach */
+    int total;
+    
+    public int sumNumbers(TreeNode root) {
+        total = 0;
+        helper(root, 0);
+        return total;
+    }
+    
+    void helper(TreeNode root, int sum) {
+        if (root == null) return; // edge case
+        
+        sum = sum * 10 + root.val; // sum is till current *10 + plus current root val 
+        
+        // if current doesnt have child then just add teh current sum to total and return 
+        if (root.left == null && root.right == null) {
+            total += sum;
+            return;
+        }
+        
+        // left and right tree recursive call with sum 
+        helper(root.left, sum);
+        helper(root.right, sum);
+    }
+    
+    /* Iterative approach
+    
+           // edge case
+            if(root==null){
+                return 0;
+            }
+            int sum = 0;
+            TreeNode curr;
+            Stack<TreeNode> ws = new Stack<TreeNode>();
+            ws.push(root); // push root to stack
+            
+            while(!ws.empty()){
+                curr = ws.pop(); // pop from stack
+                
+                // if the children are not null for the tree then just add the value of current node and the child node as value of child node
+                if(curr.right!=null){ 
+                    curr.right.val = curr.val*10+curr.right.val;
+                    ws.push(curr.right);
+                }
+                
+                if(curr.left!=null){
+                    curr.left.val = curr.val*10+curr.left.val;
+                    ws.push(curr.left);
+                }
+                
+                // if curr node does not have child add the curr value to sum
+                if(curr.left==null && curr.right==null){ // leaf node
+                    sum+=curr.val;
+                }
+            }
+            return sum; // return total sum
+            
+    */
+}
