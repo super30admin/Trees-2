@@ -88,3 +88,7 @@ class Solution {
         return root;
     }
 }
+
+
+
+//Need to solve the other type, Construct binary tree from inorder and postorder
