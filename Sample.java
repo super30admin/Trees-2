@@ -52,5 +52,39 @@ class Solution {
 }
 
 
-
 //Need to solve the other type, Construct binary tree from inorder and postorder
+//Time o(n) n - size of the array
+//space - recursive stack space
+
+class Solution {
+    
+    HashMap<Integer, Integer> map;
+    int index = 0;
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(inorder == null || inorder.length ==0)
+            return null;
+        
+        map = new HashMap<>();
+        index = postorder.length-1;
+        
+        for(int i=0;i< inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        
+        return helper(postorder, 0, inorder.length-1);
+    }
+    
+    private TreeNode helper(int[] postorder, int start, int end){
+        //base case
+        if(start > end || index < 0)
+            return null;
+        //logic
+        int rootIdx = map.get(postorder[index]);
+        TreeNode root = new TreeNode(postorder[index]);
+        index--;
+        root.right = helper(postorder, rootIdx+1,end);
+        root.left = helper(postorder, start,rootIdx-1);
+        return root;
+    }
+}
