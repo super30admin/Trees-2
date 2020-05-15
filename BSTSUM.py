@@ -32,5 +32,32 @@ class Solution(object):
             root = root.right
             
         return result
+    
+==============================
+#Recursive
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root== None:
+            return 0
+            
+        def helper (root, node_val): 
+            if root!=None:
+                helper(root.left, node_val * 10 + root.val)
+                helper(root.right, node_val * 10 + root.val)
+                if root.left == None and root.right == None:
+                    self.sum += node_val * 10 + root.val
+        self.sum = 0
+        helper(root, 0)
+        return self.sum
             
             
