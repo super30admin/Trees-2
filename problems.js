@@ -1,5 +1,9 @@
 // ## Problem1 (https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
 
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+
 var buildTree = function(preorder, inorder) {
     let hash = {};
     inorder.forEach((e, i)=>{hash[e] = i});
