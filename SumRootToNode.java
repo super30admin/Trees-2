@@ -48,3 +48,27 @@ class Solution {
         return result;
     }
 }
+//  Recursive Solution
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return helper(root, 0);
+  }
+  
+ 
+  public int helper(TreeNode root, int currSum) {
+      
+      //base
+      if(root == null) return 0;
+      // logic 
+      
+          if(root.left == null && root.right == null) {
+              return  currSum * 10 + root.val;
+          }
+      
+      return helper(root.left, currSum * 10 + root.val) + helper(root.right, currSum * 10 + root.val);
+          
+       
+          
+      }
+}
