@@ -1,0 +1,73 @@
+/* Time Complexity : O(n) -> number of nodes in the tree.
+// Space Complexity : O(h) - > stack space. h-height of the tree.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Iteratively move to each path. If the node is a leaf node add the sum to the result.Return the result.(Iterative Approach)
+// */
+class Solution {
+    class Pair{
+        TreeNode root;
+        int value;
+        Pair(TreeNode root,int value){
+            this.root=root;
+            this.value=value;
+        }
+        public TreeNode getKey(){
+            return this.root;
+        }
+        
+        public int getValue(){
+            return this.value;
+        }
+    }
+    
+    public int sumNumbers(TreeNode root) {
+      if(root==null) return 0;
+      Stack<Pair> s=new Stack<>();
+      int result=0;
+      int currSum=0;
+    while(root!=null || !s.isEmpty()){
+        while(root!=null){
+            currSum=currSum*10+root.val;
+            s.push(new Pair(root,currSum));
+            root=root.left;
+        }
+        Pair p=s.pop();
+        root=p.getKey();
+        currSum=p.getValue();
+        //check for leaf - problem specific
+        if(root.left==null && root.right==null){
+            result+=currSum;
+        }
+        root=root.right;
+        }
+        return result;
+    }
+
+}
+
+
+/* Time Complexity : O(n) -> number of nodes in the tree.
+// Space Complexity : O(h) - > stack space. h-height of the tree.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Recursively visit each path. Each sum is a result of the recursive call. Add the sums from the calls of each left hand and right hand side
+// */
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return helper(root,0);
+    }
+    
+    public int helper(TreeNode root,int currSum){
+        //base
+        if(root==null) return 0;
+        //logic 
+        if(root.left==null && root.right==null){
+              return currSum=currSum*10+root.val;
+        }
+return helper(root.left,currSum*10+root.val) + helper(root.right,currSum*10+root.val);
+            
+    }
+
+}

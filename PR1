@@ -1,0 +1,34 @@
+/* Time Complexity : O(n) -> number of nodes in the tree.
+// Space Complexity : O(n) - > All the nodes with their respective indices from the inorder array are stored in the hashmap.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach : Recursively build reft and right. Find the root index from the hashmap and recursively find the right subtree and the left subtree from here by dividing the postarray based on the index.
+// */
+
+
+class Solution {
+    Map<Integer,Integer> hmap;
+    int index;// index location in the postorder array.
+    public TreeNode buildTree(int[] inorder,int[] postorder) {
+     if(inorder.length==0 || postorder.length==0) return null;
+         hmap=new HashMap<>();
+        for(int i=0;i<inorder.length;i++){
+           hmap.put(inorder[i],i);
+        }
+        index=postorder.length-1;
+        return helper(postorder,inorder,0,inorder.length-1);  
+    }
+    
+    private TreeNode helper(int[] postorder, int[] inorder,int start,int end){
+       //base
+        if(start>end || index<0) return null;
+        //logic
+        int Idx=hmap.get(postorder[index]); //O(1)
+        TreeNode root=new TreeNode(postorder[index]);
+        index--;
+        root.right=helper(postorder,inorder,Idx+1,end);
+        root.left=helper(postorder,inorder,start,Idx-1);
+        return root;
+        
+    }
+}
