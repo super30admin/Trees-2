@@ -46,7 +46,7 @@ class Solution:
                 root=root.left
             node,current_sum = stack.pop()
         
-            if root.right==None and root.left==None:
+            if root.right is None and root.left is None:
                 res += current_sum
 
         return res
