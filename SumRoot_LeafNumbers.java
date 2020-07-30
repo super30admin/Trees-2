@@ -29,20 +29,20 @@ public class SumRoot_LeafNumbers {
 	public static int sumNumbers(TreeNode root) {
 		if(root == null)
 			return 0;
-		helper(root, 0);
+		helper(root, 0);	// calling recursive inorder method with sum 0
 		return result;
 	}
 	private static void helper(TreeNode root, int currentSum){
-		if(root == null)    // base case
+		if(root == null)    // base case, when we reach a point where there is one child and other is null
 			return;
 
 		currentSum = currentSum * 10 + root.val;
 
 		if(root.left == null && root.right == null)
-			result += currentSum;
+			result += currentSum;	// calculate sum for the leaf and return sum
 
-		helper(root.left, currentSum);
-		helper(root.right, currentSum);
+		helper(root.left, currentSum);	 // calling for left subtree with sum
+		helper(root.right, currentSum);	// calling for right subtree with sum
 	}
 
 
@@ -72,23 +72,25 @@ public class SumRoot_LeafNumbers {
 			if(root == null)    // base case
 				return 0;
 
-			Stack<Pair> stack = new Stack<>();
+			Stack<Pair> stack = new Stack<>();	// creating stack for pairs
 			int currentSum = 0;
 			int result = 0;
-			while(root != null || !stack.isEmpty()){
-				while(root != null){
-					currentSum = currentSum * 10 + root.val;
-					stack.push(new Pair(root, currentSum));
-					root = root.left;
+			while(root != null || !stack.isEmpty()){		//execute till the node becomes null and stack is empty
+				while(root != null){	// till we reach null
+					currentSum = currentSum * 10 + root.val;	// finding sum for the root
+					stack.push(new Pair(root, currentSum));	// adding root and sum to stack
+					root = root.left; // traversing left
 				}
-				Pair pairPopped = stack.pop();
+				
+				Pair pairPopped = stack.pop();	//on popping we get a pair
 				root = pairPopped.getKey();
-				currentSum = pairPopped.getValue();
-				if(root.left == null && root.right == null){
-					result += currentSum;
+				currentSum = pairPopped.getValue();	// getting the sum corresponding to the root we popped
+				
+				if(root.left == null && root.right == null){	//checking whether its a leaf node
+					result += currentSum;	// if leaf we add the popped sum to result
 				}
-				root = root.right;
-			}
+				root = root.right;	// traverse right
+			}	
 			return result;
 		}
 
