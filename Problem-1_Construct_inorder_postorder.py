@@ -6,7 +6,7 @@
 #
 #
 # Your code here along with comments explaining your approach
-# 1. Current Root will always be the last element of the current preorder array.
+# 1. Current Root will always be the last element of the current postorder array.
 # 2. Find the index of the root in inorder -> to know the left and right subtree elements.
 # 3. Then recursively call the function with left and right subtree elements of both inorder and postorder
 
@@ -50,7 +50,7 @@ class Solution:
 #
 # Your code here along with comments explaining your approach
 # 1. Instead of searching the root in inorder list each time, build a hashmap that stores the element and it's position as key and value respectively.
-# 2. Instead of creating copies of array each time (left and right subtrees of potorder and inorder), maintain two pointers - start and end of inorder for current iteration.
+# 2. Instead of creating copies of array each time (left and right subtrees of postorder and inorder), maintain two pointers - start and end of inorder for current iteration.
 # 3. Postorder is used only for obtaining the root and we dont need to know the left and right subtree from it
 
 # Definition for a binary tree node.
