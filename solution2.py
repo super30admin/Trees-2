@@ -1,7 +1,7 @@
-# // Time Complexity : o(n) for deepcopy at each node + o(n/2)*o(height of tree).
-# // for complete binary tree, time complexity will be o(nlogn)
+# // Time Complexity : o(n*n + n/2*height => for loop inside addall at each leaf nodes) == o(n^2)
+# // Space Complexity : o(n*h)
+# // for complete binary tree, space complexity will be o(nlogn)
 # // else for a tree with single leaf with n nodes, o(n^2)
-# // Space Complexity : o(n^2) every node(n) stores a copy of stack(o(n))
 # // Did this code successfully run on Leetcode : yes
 # // Any problem you faced while coding this : Not in particular
 #
