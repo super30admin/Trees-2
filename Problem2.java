@@ -31,7 +31,7 @@ class Problem2S1 {
         }
     }
 
-    /**Definition for a Pair hodls Node and Sum.*/
+    /**Definition for a Pair holds Node and Sum.*/
     class Pair{
         TreeNode node;
         int value;
