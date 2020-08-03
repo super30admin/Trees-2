@@ -1,0 +1,52 @@
+Approach1 : Recursive Approach (DFS) (Traverse through the entire tree. Root to left)
+Time Complexity:O(n) ----> we are going through each node only once
+Space Complexity :O(H) ---- > Depth of the recursion/max height of the tree. At every single point stack push and pop operation happening.
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        self.result=0  ### Global Variable Declaration
+        def helper(root,cur_sum):
+            ## Base Case
+            if root is None:
+                return 0
+            ## Logic
+            elif root.left==None and root.right==None:
+                self.result+=cur_sum*10+root.val
+            cur_sum=cur_sum*10+root.val
+            helper(root.left,cur_sum)
+            helper(root.right,cur_sum)
+    
+        helper(root,0)
+        return self.result
+
+Approach2 : Iterative Approach
+Time Complexity :O(N)
+Space Complexity :O(H) --- > Height of the Tree
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:  ### Iterative Solution which is BFS
+        if not root:
+            return 0
+        stack = [(root, 0)]
+        res = 0 # Global Variable
+        current_sum=0
+        while (root!=None or len(stack)!=0 ):
+            while (root!=None):
+                current_sum = current_sum*10 + root.val
+                stack.append((root.val, current_sum))
+                root=root.left
+            node,current_sum = stack.pop()
+        
+            if root.right is None and root.left is None:
+                res += current_sum
+
+        return res
