@@ -1,0 +1,24 @@
+Approach 1 :
+Time Complexity : O(n*2) ---> Trying to find root at every node in pre order traversal
+Space Complexity : O(n*2) ---- > Each time we will be making a copy .
+Approach 2 :
+Time complexity :O(N)
+Space complexity :O(N) Since we store the entire Tree
+Approach 1 : Recursive method
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        ## Edge case
+        if len(preorder) ==0 or len(inorder)==0:
+            return None
+        rootValue = preorder[0]
+        root = TreeNode(rootValue)
+        inorderIndex = inorder.index(rootValue)
+        root.left = self.buildTree(preorder[1:inorderIndex+1], inorder[:inorderIndex])
+        root.right =self.buildTree(preorder[inorderIndex+1:],inorder[inorderIndex+1:])
+        return root
