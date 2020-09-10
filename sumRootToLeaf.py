@@ -1,5 +1,5 @@
-# // Time Complexity : 
-# // Space Complexity : 
+# // Time Complexity : O(n), n = no. of elements
+# // Space Complexity : O(maxDepth), without recursive stack-> O(1)
 # // Did this code successfully run on Leetcode : Yes
 # // Any problem you faced while coding this : No
 
