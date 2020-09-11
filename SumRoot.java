@@ -1,14 +1,14 @@
 import java.util.Stack;
-
+//Problem 45
 public class SumRoot {
 
 	class PairValue {
 		int key;
-		TreeNode root;
+		TreeNode node;
 
-		public PairValue(TreeNode root, int val) {
+		public PairValue(TreeNode node, int val) {
 			// TODO Auto-generated constructor stub
-			this.root = root;
+			this.node = node;
 			this.key = val;
 		}
 
@@ -16,16 +16,8 @@ public class SumRoot {
 			return key;
 		}
 
-		public void setKey(int key) {
-			this.key = key;
-		}
-
 		public TreeNode getNode() {
-			return root;
-		}
-
-		public void setNode(TreeNode root) {
-			this.root = root;
+			return node;
 		}
 
 	}
@@ -35,8 +27,9 @@ public class SumRoot {
 		if (null == root) { // base/edge condition
 			return 0;
 		}
-		int currResult = 0;
+
 		Stack<PairValue> st = new Stack<PairValue>();
+		int currResult = 0;
 		while (root != null || !st.isEmpty()) {
 
 			while (root != null) {
@@ -47,7 +40,7 @@ public class SumRoot {
 			PairValue pv = st.pop();
 			root = pv.getNode();
 			currResult = pv.getKey();
-			if (root.left == null || root.right == null)
+			if (root.left == null && root.right == null)
 				result += currResult;
 
 			root = root.right;
@@ -58,14 +51,33 @@ public class SumRoot {
 
 	}
 
+	private int sumNumberRecur(TreeNode root) {
+
+		return helper(root, 0);
+	}
+
+	private int helper(TreeNode root, int currVal) {
+		// TODO Auto-generated method stub
+		// base
+		if (null == root) {
+			return 0;
+		}
+
+		// logic
+		if (root.left == null && root.right == null)
+			return currVal * 10 + root.val;
+		return helper(root.left, currVal * 10 + root.val) + helper(root.right, currVal * 10 + root.val);
+	}
+
 	public static void main(String[] args) {
 
-		TreeNode left = new TreeNode(2, null, null);
+		TreeNode left = new TreeNode(0, null, null);
 		TreeNode right = new TreeNode(3, null, null);
 		TreeNode root = new TreeNode(1, left, right);
-		
+
 		SumRoot sumroot = new SumRoot();
 		System.out.println(sumroot.sumNumbers(root));
+		System.out.println("Using recursion"+sumroot.sumNumberRecur(root));
 
 	}
 
