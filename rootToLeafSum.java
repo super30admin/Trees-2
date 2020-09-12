@@ -37,7 +37,11 @@ class Solution {
         // now here we will check if its leaf node or not
         // if leaf node then add it to res
         // at the end we want to go to root.right
+
+        // so basically,outer while loop to check if right has been traversed
         while (root != null || !st.isEmpty()) {
+
+            // inner while loop to check if left has been traversed
             while (root != null) {
                 num_sofar = num_sofar * 10 + root.val;
                 st.push(new Pair(root, num_sofar));

@@ -1,5 +1,5 @@
 // Time Complexity : O(T(n/2)+n)where N/2 is because we are dividing and n because of the for loop which is O(n)(Masters Theorm) 
-// Space Complexity : O(h) where h is the height of the tree which is the recursion call 
+// Space Complexity : O(n^2)  since we are making two lists(of size n) n times
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this :
 
