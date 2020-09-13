@@ -1,5 +1,5 @@
 // Problem 1 - Construct Binary Tree from Inorder and Postorder Traversal
-// Time Complexity : O(n) where n = number of nodes
+// Time Complexity : O(n^2) where n = number of nodes
 // Space Complexity : O(maxdepth)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
