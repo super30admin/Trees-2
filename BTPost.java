@@ -4,7 +4,7 @@
 // Any problem you faced while coding this : No
 
 
-// Your code here along with comments explaining your approach
+//Similar to the solution of previous problem build tree by using Preorder and Inorder
 class Solution {
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         if(postorder.length==0){
