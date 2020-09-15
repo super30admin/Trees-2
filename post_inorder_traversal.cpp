@@ -49,6 +49,47 @@ public:
     }
     
 };
+
+class Solution {
+public:
+    unordered_map<int,int> my_map;
+    int post_index;
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        //edge
+        if(inorder.size()==0 && postorder.size()==0){
+            return NULL;
+        }
+        for(int i=0; i<inorder.size();i++){
+            my_map[inorder[i]] =i;
+        }
+        TreeNode* root;
+        //recurse
+        post_index= postorder.size()-1;
+        root = dfs(postorder, 0, postorder.size()-1);
+        return root;
+    }
+    
+    TreeNode* dfs(vector<int>& postorder, int in_start, int in_end){
+        //return
+        if(in_start > in_end){
+            return NULL;
+        }
+            
+        //logic
+        if(post_index<0){
+            return NULL;
+        }
+        
+        int val = postorder[post_index];
+        TreeNode* temp = new TreeNode(val);
+        int index = my_map[val];
+        post_index--;
+        
+        temp->right  = dfs(postorder, index+1, in_end);
+        temp->left  = dfs(postorder, in_start, index-1);
+        return temp;
+    }
+};
 //Recursive solution
 // Time Complexity : O(n^2)
 // Space Complexity : O(n).
