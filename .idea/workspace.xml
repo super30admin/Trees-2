@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="332e4e49-3e9b-4efd-b5a5-7c60f88af175" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sum_root_to_leaf_numbers_iterative.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sum_root_to_leaf_numbers_recursive.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/binary_tree_from_preorder_and_postorder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py" beforeDir="false" afterPath="$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,25 +22,25 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="md" value="1" />
-          <entry key="py" value="3" />
+          <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="1" />
-          <entry key="Python" value="3" />
+          <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="10" />
-          <entry key="py" value="314" />
+          <entry key="py" value="386" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="314" />
+          <entry key="Python" value="386" />
         </counts>
       </usages-collector>
     </session>
@@ -66,11 +65,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+            <state>
+              <caret selection-end-line="6" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/binary_tree_from_preorder_and_postorder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -94,6 +102,7 @@
         <option value="$PROJECT_DIR$/sum_root_to_leaf_numbers_recursive.py" />
         <option value="$PROJECT_DIR$/sum_root_to_leaf_numbers_iterative.py" />
         <option value="$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py" />
+        <option value="$PROJECT_DIR$/binary_tree_from_preorder_and_postorder.py" />
       </list>
     </option>
   </component>
@@ -215,8 +224,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/binary_tree_from_inorder_and_postorder_traversal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        <state>
+          <caret selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/binary_tree_from_preorder_and_postorder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
         </state>
       </provider>
     </entry>

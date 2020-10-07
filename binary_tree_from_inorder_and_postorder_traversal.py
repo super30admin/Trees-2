@@ -1,7 +1,7 @@
 """
 Problem: 106. Construct Binary Tree from Inorder and Postorder Traversal
 Leetcode: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
-Solution: Recursion
+Solution: Recursive approach
 Time Complexity: O(n), we traverse all nodes in the tree
 Space Complexity: O(n), since we store the entire tree.
 """
