@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+//TC: O(n) traversing postorder arry
+//SP: O(n) hashmap
+class Solution {
+    int[] inorder;
+    int[] postorder;
+    int post_idx;
+    HashMap<Integer, Integer> hmap;
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        
+        this.inorder = inorder;
+        this.postorder = postorder;
+        post_idx = postorder.length-1;
+        hmap = new HashMap<Integer, Integer>();
+        
+        int idx = 0;
+        for(int x: inorder){
+            hmap.put(x, idx++);    
+        }
+        
+        return helper(0, postorder.length-1);
+        
+    }
+    
+    public TreeNode helper(int left, int right){
+        
+        if(left > right) return null;
+        
+        int val = postorder[post_idx--];
+        
+        TreeNode root = new TreeNode(val);
+        int index = hmap.get(val);
+        
+       // in postorder traversal we need to build rightsubtree before leftsubtree
+        root.right = helper(index+1, right);
+        root.left = helper(left, index-1);
+        
+        return root;
+        
+    }
+}
