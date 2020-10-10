@@ -1,0 +1,71 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+// time complexity: O(n); space complexity: O(n)
+//preorder traversal of tree
+/*class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        
+       helper(root, 0);
+       return sum;
+        
+    }
+  public void helper(TreeNode root, int curr_sum){
+      
+      if(root == null) return; // we are not processing it
+      
+      if(root.left == null && root.right == null){
+          curr_sum = curr_sum*10 + root.val;
+          sum += curr_sum;
+          return;
+      }
+      
+      curr_sum = curr_sum*10 + root.val;
+      helper(root.left, curr_sum);
+      helper(root.right, curr_sum);
+     
+  }
+    
+}*/
+
+class Solution{
+    public int sumNumbers(TreeNode root){
+        
+        Stack<Pair<TreeNode, Integer>> stack = new Stack<>();
+        int sum = 0;
+        
+        stack.push(new Pair(root, 0));
+        
+        while(! stack.isEmpty()){
+            
+            Pair<TreeNode, Integer> p = stack.pop();
+            root = p.getKey();
+            int curr_sum = p.getValue();
+            
+            if(root != null) {
+                curr_sum = curr_sum*10 + root.val;
+                if(root.left == null && root.right == null){
+                    sum += curr_sum;
+                }
+                else {
+                stack.push(new Pair(root.right, curr_sum));
+                stack.push(new Pair(root.left, curr_sum));
+             }
+            }
+        }
+        return sum;
+}
+}
