@@ -1,0 +1,20 @@
+# Time Complexity: O(n) - n is the num of nodes in the binary tree
+# Space Complexity: O(h) - h is the max height of the binary tree
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. At the current node, add the value to the local var sumVal * 10
+# 2. At a leaf node, return sumVal*10 + value at node
+# 3. Inorder traversal followed
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        sumVal = 0
+        return self.helper(root, sumVal)
+    
+    def helper(self, root, sumVal):
+        if root is None: 
+            return 0
+        if root.left is None and root.right is None:
+            return sumVal*10 + root.val
+        return self.helper(root.left, sumVal*10 + root.val) + self.helper(root.right, sumVal*10 + root.val)

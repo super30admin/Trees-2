@@ -1,0 +1,25 @@
+# Time Complexity: O(n) - n is the num of nodes in the binary tree
+# Space Complexity: O(h) - h is the max height of the binary tree
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation: 
+# 1. At the value of the current node to the local var curSum*10
+# 2. When encountered with a leaf node, add this curSum to mainSum
+# 3. Inorder traversal followed
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        stack = []
+        curSum = 0
+        mainSum = 0
+        while (root is not None or len(stack) != 0):
+            while (root is not None):
+                curSum = curSum*10 + root.val
+                if root.left is None and root.right is None:
+                    mainSum += curSum
+                stack.append((root, curSum))
+                root = root.left
+            root = stack.pop()
+            curSum = root[1]
+            root = root[0].right
+        return mainSum
