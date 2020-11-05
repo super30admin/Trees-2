@@ -1,4 +1,4 @@
-#The simple way to do this is to check for root and left right array from inorder and preeorder reespectiveely.
+#The simple way to do this is to recurse through all paths and add to global sum and return it at end.
 #Time Complexity: O(n)
 #Space Complexity: O(h)
 class TreeNode:
@@ -34,4 +34,4 @@ n1.left = n2
 n1.right = n3
 s = Solution()
 s = s.getTree(n1)
-print(s)
+print()
