@@ -1,0 +1,22 @@
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+
+class Solution {
+     private int ans = 0;
+    public int sumNumbers(TreeNode root) {
+       
+        dfs(root, 0);
+        return ans;
+    }
+    
+    void dfs(TreeNode root, int prefix) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) { ans += prefix * 10 + root.val; return; }
+        if (root.left != null) dfs(root.left, prefix * 10 + root.val);
+        if (root.right != null) dfs(root.right, prefix * 10 + root.val);
+    }
+    
+        
+    
+}

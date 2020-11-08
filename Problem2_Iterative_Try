@@ -1,0 +1,40 @@
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> valStack = new Stack<>();
+        int val=0;
+        int sum =0;
+        TreeNode ptr = root;
+        if(root==null)  return 0;
+        if(root.left==null&&root.right==null) return root.val;
+        stack.push(ptr);
+        while(!stack.isEmpty())
+        {              
+            while(ptr.left!=null)
+            {
+                if(val==0)
+                {
+                    val = ptr.val;                  
+                }
+                else
+                {
+                    val = val*10 + ptr.val;                    
+                }
+               valStack.push(val);
+               stack.push(ptr);
+               ptr = ptr.left;
+            }
+            sum = sum+val;
+            ptr = stack.pop();
+            val = valStack.pop();
+            
+           if(ptr.right!=null)
+           {
+               ptr = ptr.right;
+               stack.push(ptr);
+           }
+        }
+        return sum;
+        
+    }
+}
