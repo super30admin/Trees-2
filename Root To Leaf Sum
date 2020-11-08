@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        # Idea: Everytime we go one level down in tree that current node is going to shift its place to the left as per its position in making the number. Example Root 4, for next level number, it will 40 and so on.
+        # Multiply Each level nodes by 10 recursively. 
+        # When you reach the leaf node return the final number.
+        
+        # Time Complexity: O(n)
+        # Auxiliary Space: O(1)
+        # Space Complexity: O(n)
+        return self.helper(root,0)
+    
+    def helper(self,root,curr_val):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return root.val + curr_val*10
+        return self.helper(root.left,curr_val*10 + root.val) + self.helper(root.right,curr_val*10 + root.val)
+        
