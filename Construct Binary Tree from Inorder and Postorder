@@ -1,0 +1,39 @@
+// Time Complexity : O(N)
+// Space Complexity : O(H) -> height of the tree ??
+
+// Your code here along with comments explaining your approach: Idea is to use HashMap to store index information of inorder Array.
+//Using postorder in reverse order to determine root.
+//Utilizing inorder to decide shape of tree i.e left & right subtree
+
+SOLUTION:
+
+class Solution {
+    HashMap<Integer, Integer> hmap; 
+    int index;  //pointer for root elements in postorder array
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        hmap = new HashMap<>();
+        for(int i = 0 ; i < inorder.length ; i++){
+            hmap.put(inorder[i],i);
+        }
+        index = postorder.length - 1;   //Determine the first root element
+        return helper(postorder,0,inorder.length - 1);
+    }
+    
+    public TreeNode helper(int[] postorder,int start, int end){
+        if(start > end){
+            return null;
+        }
+        int rootVal = postorder[index];   
+        // System.out.println(rootVal);
+         index--;   //moving root pointer in postorder
+
+        int rootIndex = hmap.get(rootVal);    //get point of division of left & right subtree from inorder array.
+
+        TreeNode temproot = new TreeNode(rootVal);
+        /* temproot right and left SUBTREE --> temproot.right && temproot.left*/
+        temproot.right = helper(postorder,rootIndex + 1, end);    //right subtree
+        temproot.left = helper(postorder, start , rootIndex - 1);   //left subtree
+        
+        return temproot;
+    }
+}
