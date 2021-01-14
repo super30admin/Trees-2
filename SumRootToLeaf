@@ -1,0 +1,26 @@
+class SumRootToLeaf{
+
+    int sum;
+
+    public int sumNumbers(TreeNode root) {
+        sum = 0;
+        StringBuilder sb = new StringBuilder();
+        helper(root,sb);
+        return sum;
+    }
+
+    private void helper(TreeNode root, StringBuilder sb){
+        if (root== null) return;
+
+        sb.append(root.val);
+        int length = sb.length();
+
+        if (root.left == null && root.right == null){
+            sum += Integer.ValueOf(sb.toString());
+        }
+
+        helper(root.left,sb);
+        sb.setLength(length);
+        helper(root.right,sb);
+    }
+}
