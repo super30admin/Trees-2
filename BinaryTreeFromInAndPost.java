@@ -3,6 +3,10 @@ Leetcode: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-p
 
 106. Construct Binary Tree from Inorder and Postorder Traversal
 
+Time Complexity : O(N)
+Space Complexity : O(N) considering the recursion stack
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
 **/
 
 class Solution 
