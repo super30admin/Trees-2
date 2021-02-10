@@ -1,5 +1,5 @@
 //Time O(n)
-//Space: O(max depth)
+//Space: O(max depth+n) //hashmap too
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
