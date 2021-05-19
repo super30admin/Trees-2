@@ -1,29 +1,36 @@
+/* Approach
+1. The first element in the preorder order list will awlays be the root node.
+2. Find the same node in inorder list. And the elements on the left of the node in inorder list would be the left elements of the node in the tree and the right elements in list would also be the right nodes in the tree.
+3. Using this logic, form the tree recursively
+
+Time complexity: O(N)
+Space complexity: O(1)
+*/
 class Solution {
-    int index = 0;
     HashMap<Integer, Integer> map = new HashMap<>();
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
-        if(inorder.length==0)
+    int index=0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        //emtpty tree
+        if(preorder.length==0)
             return null;
         
-        for(int i=0; i<=inorder.length-1;i++)
+        for(int i=0; i<=inorder.length-1; i++)
         {
             map.put(inorder[i],i);
         }
-        index = postorder.length-1;
-        return constructTree(inorder, postorder, 0, inorder.length-1);
+        
+        return constructTree(preorder, inorder, 0, inorder.length-1);
     }
     
-    private TreeNode constructTree(int[] inorder, int[] postorder, int start, int end)
+    private TreeNode constructTree(int[] preorder, int[] inorder, int start, int end)
     {
-        if(start>end)
-            return null;
-        int rootIndex = map.get(postorder[index]);
-        TreeNode root = new TreeNode(postorder[index]);
-        index--;
-
-        root.right = constructTree(inorder, postorder, rootIndex+1, end);
-        root.left = constructTree(inorder, postorder,  start, rootIndex-1);
-
+        if(start>end) return null;
+        int rootIndex = map.get(preorder[index]);
+        TreeNode root = new TreeNode(preorder[index]);
+        index++;
+        root.left = constructTree(preorder, inorder, start, rootIndex-1);
+        root.right = constructTree(preorder, inorder, rootIndex+1, end);
+    
         return root;
     }
 }
