@@ -43,7 +43,7 @@ class Solution {
 
 // Your code here along with comments explaining your approach
 
-class Solution {
+class Solution2 {
     
     int curr = 0;
     int result = 0; 
