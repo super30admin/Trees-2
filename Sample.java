@@ -43,7 +43,8 @@ class Solution {
 
 // Your code here along with comments explaining your approach
 
-class Solution2 {
+//Solution 1
+class Solution1 {
     
     int curr = 0;
     int result = 0; 
@@ -67,5 +68,56 @@ class Solution2 {
         helper(root.right, curr); //inorder right
         
         
+    }
+}
+//Solution 2
+
+//Create a new Pair to store the root and value into the stack 
+class Pair{
+    TreeNode node; 
+    int value; 
+    
+    public Pair(TreeNode node, int value){
+        this.node = node;
+        this.value = value; 
+    }
+    
+    public TreeNode getKey(){
+        return node;
+    }
+    
+    public int getValue(){
+        return this.value; 
+    }
+}
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        
+        Stack<Pair> stack = new Stack<>(); 
+        
+        int curr = 0; 
+        int result = 0;
+        
+        while(root != null || !stack.isEmpty()){
+            
+            while(root != null){
+                curr = curr * 10 + root.val; //calculate the curr sum
+                stack.push(new Pair(root , curr)); //push it into the stack 
+                root = root.left; 
+            }
+            
+            Pair p = stack.pop(); //pop the stack pair
+            root = p.getKey(); //update the root to current popped root
+            curr = p.getValue(); //update the value to current popped value
+            
+            if(root.left == null && root.right == null){
+                result = result + curr; //if leaf node, add it to result
+            }
+            
+            root = root.right; //inorder right
+        }
+        
+        return result; 
     }
 }
