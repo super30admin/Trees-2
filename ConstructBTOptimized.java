@@ -1,5 +1,7 @@
 //Time Complexity - O(n)
 //Space Complexity - O(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
 
 
 /**
@@ -20,7 +22,7 @@
 class Solution {
    HashMap<Integer, Integer> map;
    int idx; // preporder arr pointer
-   //Brute force solution
+ 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
       if(preorder.length == 0) return null;
       map = new HashMap<>();
