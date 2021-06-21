@@ -25,7 +25,7 @@ class Solution:
             pair=st.pop() #popping of root and curr sum at that root
             root=pair[0]
             curr_sum=pair[1]
-            if root.left==None and root.right==None:
+            if root.left==None and root.right==None: #check if leaf node
                 RL_value+=curr_sum
             root=root.right
 
