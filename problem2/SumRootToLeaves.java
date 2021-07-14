@@ -1,3 +1,7 @@
+// Time Complexity : O(n)
+// Space Complexity : O(h), h -> Height of tree
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 package problem2;
 
 public class SumRootToLeaves {
