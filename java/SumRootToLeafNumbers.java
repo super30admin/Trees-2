@@ -21,6 +21,69 @@
  * }
  * }
  */
+Iterative:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Pair{
+    TreeNode root;
+    int sum;
+
+    public Pair(TreeNode root, int sum ){
+        this.root=root;
+        this.sum=sum;
+    }
+
+    public TreeNode getKey(){
+        return this.root;
+    }
+    public int getSum(){
+        return this.sum;
+    }
+}
+class Solution {
+    //int res =0;
+    public int sumNumbers(TreeNode root) {
+        if(root==null) return 0;
+        Stack<Pair> stack = new Stack<>();
+        int currSum =0, res=0;
+        while(root!=null || !stack.isEmpty()){
+            //left
+            while(root!=null){
+                currSum = currSum * 10 +  root.val;
+                stack.push(new Pair(root, currSum));
+                root=root.left;
+            }
+            Pair pair = stack.pop();
+            //root
+            root = pair.getKey();
+            currSum = pair.getSum();
+            if(root.left==null && root.right==null){
+                res = res + currSum;
+            }
+            //right
+            root=root.right;
+        }
+        return res;
+    }
+
+}
+
+-----------------------------------------------------------------------
+
+Recursive:
 class Solution {
     int rootToLeaf = 0;
 
