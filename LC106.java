@@ -10,30 +10,29 @@ public class LC106 {
     HashMap<Integer, Integer> map = new HashMap();
     int idx;
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        idx = postorder.length - 1;
         int iStart = 0;
         int iEnd = inorder.length - 1;
 
         for (int i = 0; i < inorder.length; i++)
             map.put(inorder[i], i); // memoization
 
-        return helper(preorder, inorder, iStart, iEnd);
+        return helper(inorder, postorder, iStart, iEnd);
 
     }
 
-    public TreeNode helper(int[] preorder, int[] inorder, int iStart, int iEnd) {
+    public TreeNode helper(int[] inorder, int[] postorder, int iStart, int iEnd) {
         if (iStart > iEnd)
             return null;
 
-        // Output root node is nothing but starting node of preorder
-        TreeNode root = new TreeNode(preorder[idx]);
+        TreeNode root = new TreeNode(postorder[idx]);
 
-        // Find the position of the root node in the inorder array
-        int iRoot = map.get(preorder[idx]);
-        idx++;
+        int iRoot = map.get(postorder[idx]);
+        idx--;
 
-        root.left = helper(preorder, inorder, iStart, iRoot - 1);
-        root.right = helper(preorder, inorder, iRoot + 1, iEnd);
+        root.right = helper(inorder, postorder, iRoot + 1, iEnd);
+        root.left = helper(inorder, postorder, iStart, iRoot - 1);
 
         return root;
 
