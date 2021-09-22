@@ -70,7 +70,7 @@ class Solution {
 //TC O(N)
 //SC O(H)
 
-//Recursive Solution
+//Recursive Solution void function
 
 /**
  * Definition for a binary tree node.
@@ -109,5 +109,49 @@ class Solution {
         }
         
         helper(root.right,csum);
+    } 
+}
+
+
+//Recursive Solution int return function
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // int result = 0;
+    public int sumNumbers(TreeNode root) {
+        int csum = 0;
+        
+        
+        return helper(root, 0);
+        
+        
+    }
+    private int helper(TreeNode root, int csum){
+        if(root==null) return 0;
+         if(root.left ==null && root.right == null){
+            return csum*10 +root.val;
+        }
+        
+        csum = csum*10 + root.val;
+        return helper(root.left,csum) + helper(root.right,csum);
+        
+        
+       
+        
+//         helper(root.right,csum);
     } 
 }
