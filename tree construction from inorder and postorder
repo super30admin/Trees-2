@@ -1,0 +1,51 @@
+//Time complexity:-o(<n^2)
+//space complexity:-o(n)
+//Did this code run on leetcode:- Yes.
+//What problems did you face while coding:- got some null pointer exceptions.
+// yur code with explanation:- building tree by reversing post order as postorder last element is root.For every reccursion
+//values and limits are changes by using three pointers.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private int postindex;
+    private HashMap<Integer,Integer> hashmap;
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(postorder==null||inorder==null){
+            return null;
+        }
+        hashmap=new HashMap<>();
+        postindex=postorder.length-1;
+        for(int i=0;i<inorder.length;i++){
+            hashmap.put(inorder[i],i);
+        }
+        return reccursiontree(inorder,postorder,0,inorder.length-1);
+        
+}
+    private TreeNode reccursiontree(int[] inorder,int[] postorder,int instart,int inend){
+        if(instart>inend){
+            return null;
+        }
+        TreeNode root=new TreeNode(postorder[postindex]);
+        postindex=postindex-1;
+        int index=hashmap.get(root.val);
+        root.right=reccursiontree(inorder,postorder,index+1,inend);
+        root.left=reccursiontree(inorder,postorder,instart,index-1);
+        return root;
+        
+    }
+}
