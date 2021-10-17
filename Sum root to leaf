@@ -1,0 +1,31 @@
+# Did it run on Leetcode: yes
+# Time Complexity: O(n*n)
+# Space Complexity: O(n)
+
+class Solution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.final_result=0
+        self.total=0
+        
+        def helper(node):
+            if not node:
+                return root
+            
+            self.total=self.total*10 + node.val
+            
+            if node.left==None and node.right==None:    
+                self.final_result+=self.total
+            else:
+                helper(node.left)
+                helper(node.right)
+                # print(self.total)#=total//10
+            
+            self.total=self.total//10
+        
+        helper(root)
+        
+        return self.final_result
