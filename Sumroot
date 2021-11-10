@@ -1,0 +1,27 @@
+
+Time Complexity : O(N);
+Space Complexity : O(H) // Stack Space
+
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return sumNumbersHelper(root, 0);
+    }
+
+    private int sumNumbersHelper(TreeNode node, int curVal) {
+        if (node == null) {
+            return 0;
+        }
+
+        curVal = curVal * 10 + node.val;
+        if (node.left == null && node.right == null) {
+            return curVal;
+        }
+
+        return sumNumbersHelper(node.left, curVal) + sumNumbersHelper(node.right, curVal);
+    }
+}
