@@ -1,5 +1,5 @@
 // Time Complexity :O(n)
-// Space Complexity :O(1)
+// Space Complexity :O(n)-recursive stack
 // Did this code successfully run on Leetcode :yes
 
 class Solution {
