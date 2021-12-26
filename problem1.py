@@ -1,6 +1,6 @@
 # // Time Complexity : O(n)
-# // Space Complexity :  O(n)
-# // Did this code successfully run on Leetcode :Yes
+# // Space Complexity :O(n)
+# // Did this code successfully run on Leetcode : Yes
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -8,28 +8,42 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
-
-    def pathSum(self, root, targetSum):
+    idx = 1
+    indexes = {}
+    def buildTree(self, inorder, postorder):
         """
-        :type root: TreeNode
-        :type targetSum: int
-        :rtype: List[List[int]]
+        :type inorder: List[int]
+        :type postorder: List[int]
+        :rtype: TreeNode
         """
-        def findPath(root,curSum,ts,temp_path):
-            if root == None:
-                return
-            curSum += root.val
-            temp_path = temp_path + [root.val]
-            if not root.left and not root.right and curSum == ts:
-                path.append(temp_path)
-            if root.left:
-                findPath(root.left,curSum,ts,temp_path)
-            if root.right:
-                findPath(root.right,curSum,ts,temp_path)
+        # self.idx = len(postorder) - 1
+        for i in range(0,len(inorder)):
+            self.indexes[inorder[i]] = i
 
-        if root == None:
-            return []
-        temp_path = []
-        path = []
-        findPath(root,0,targetSum,temp_path)
-        return path
+        return self.buildLeftRight(postorder,inorder,0,len(postorder)-1)
+
+
+
+    def buildLeftRight(self,postorder,inorder,start,end):
+        if (start>end):
+            return None
+        else:
+            retNode = TreeNode()
+
+            retNode.val = postorder[-self.idx]
+            print(-self.idx)
+            print( postorder[-self.idx])
+            self.idx += 1
+
+            #get the index
+            if retNode == None:
+                return None
+            elif start==end:
+                return retNode
+            else:
+                idx_hashmap = self.indexes[retNode.val]
+                remaining_nums = idx_hashmap - len(inorder)
+                retNode.right = self.buildLeftRight(postorder,inorder,idx_hashmap+1,end)
+                retNode.left = self.buildLeftRight(postorder,inorder,start,idx_hashmap-1)
+
+                return retNode
