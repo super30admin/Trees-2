@@ -1,6 +1,7 @@
-# // Time Complexity :O(n)
+# // Time Complexity : O(n)
 # // Space Complexity :O(n)
 # // Did this code successfully run on Leetcode : Yes
+# Definition for a binary tree node.
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -8,25 +9,30 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
-    valid = True
-    def isSymmetric(self, root):
+    res = 0
+    def sumNumbers(self, root):
         """
         :type root: TreeNode
-        :rtype: bool
+        :rtype: int
         """
-        if root==None:
-            return self.valid
-        self.checkSymmetry(root.left,root.right)
-        return self.valid
-
-    def checkSymmetry(self,root1,root2):
-        #base
-        if (not root1 and not root2):
+        if root == None:
             return
-        if (not root1 or not root2 or root1.val!=root2.val):
-            self.valid = False
-            return
+        else:
+            self.accSum(root,0)
+            return self.res
 
-        #logic
-        self.checkSymmetry(root1.left,root2.right)
-        self.checkSymmetry(root1.right,root2.left)
+    def accSum(self,root,curSum):
+
+        curSum = curSum * 10 + root.val
+        #check for leaf node
+        if (not root.left and not root.right):
+            self.res += curSum
+            return
+        if (root.left):
+            self.accSum(root.left,curSum)
+        if (root.right):
+            self.accSum(root.right,curSum)
+
+
+
+
