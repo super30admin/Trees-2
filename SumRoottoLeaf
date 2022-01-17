@@ -1,0 +1,21 @@
+//number is calculated bu num*10 +root.val
+//tc: O(n)
+//sc: O(1)
+//passed all cases on leetcode: yes
+class Solution {
+    int sum;
+    public int sumNumbers(TreeNode root) {
+        helper(root,0);
+        return sum;
+        
+    }
+    //calculating the sum at the root level (from top) for every root, and giving the sum back in recursion
+    private void helper(TreeNode root, int num){
+        if (root == null) return;
+        helper(root.left, (num*10)+root.val ); 
+        helper(root.right, (num*10)+root.val);
+        if (root.left == null && root.right == null){
+        sum += num*10 +root.val;
+        }
+    }
+}
