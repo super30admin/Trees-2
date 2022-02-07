@@ -27,3 +27,34 @@ class Solution {
         return root;
     }
 }
+
+//Time Complexity: O(n)
+//Space Complexity: O(n)
+
+class Solution {
+    HashMap<Integer, Integer> map;
+    int idx;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || preorder.length == 0) return null;
+        map = new HashMap<>();
+        for(int i = 0; i<inorder.length; i++){
+            map.put(inorder[i],i);
+        }
+        return helper (preorder, inorder, 0, inorder.length -1);
+        
+    }
+    private TreeNode helper (int[] preorder, int[] inorder, int start,int end){
+        //base
+        if(start > end) return null;
+        
+        //logic
+        int rootval = preorder[idx];
+        idx++;
+        TreeNode root = new TreeNode(rootval);
+        
+        int rootidx = map.get(rootval);
+        root.left = helper(preorder, inorder, start, rootidx -1);
+        root.right = helper(preorder, inorder, rootidx+1, end);
+        return root;
+    }
+}
