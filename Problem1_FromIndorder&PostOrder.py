@@ -1,6 +1,6 @@
-#Time Complexity:
-#Space Complexity:
-#Works On LeetCode: 
+#Time Complexity: O(n)
+#Space Complexity: O(n)
+#Works On LeetCode: Yes
 
 class Node:
     def __init__(self, data):

@@ -1,6 +1,6 @@
-#Time Complexity:
-#Space Complexity:
-#Leetcode: 
+#Time Complexity: O(n)
+#Space Complexity: O(m) =>Height of Tree in Recursion Stack
+#Leetcode: Yes
 
 class Node:
     def __init__(self, data):
