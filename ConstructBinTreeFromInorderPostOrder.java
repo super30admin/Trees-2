@@ -1,5 +1,5 @@
 // Time Complexity : O(n) using hashmap else O(n^2) without HashMap; for every node we are checking in order position and then doing.
-// Space Complexity : O(1) if recursion ignore but if so then ~ Implicit stack O(H); if tree is skewed
+// Space Complexity : Implicit stack O(n) ~ O(h) h - height of tree, when the tree is skewed but it is O(1) if recursion stack ignored because using only constant variables
 // Did this code successfully run on Leetcode : Yes; (https://leetcode.com/submissions/detail/652832914/)
 // Any problem you faced while coding this : No
 // My Notes : Approach 1 : visit the nodes in the postorder from reverse and split the inorders
