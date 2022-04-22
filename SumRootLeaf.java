@@ -20,6 +20,7 @@ class TreeNode {
 
 public class SumRootLeaf {
 
+    // **** Using a global variable ****
     // TC - O(n) n - number of nodes in a tree
     // SC - O(h) h - height of the tree
     int sum;

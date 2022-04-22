@@ -1,5 +1,6 @@
 public class SumRootLeaf2 {
 
+    // **** Using local variable ****
     // TC - O(n) n - number of nodes in a tree
     // SC - O(h) h - height of the tree
     public int sumNumbers(TreeNode root) {
