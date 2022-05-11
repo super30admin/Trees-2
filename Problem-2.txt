@@ -1,0 +1,31 @@
+https://leetcode.com/problems/sum-root-to-leaf-numbers/
+
+//tc- O(n) - each node
+//sc-O(h) - height of tree
+//recursion
+class Solution {
+    int result;
+    public int sumNumbers(TreeNode root) {
+        
+        if(root == null) return 0;
+        
+        order(root , 0);
+        return result;
+        
+    }
+    
+    private void order(TreeNode root , int currSum){
+        //base
+        if(root != null){
+           currSum = currSum *10 +root.val;
+        
+        if(root.left == null && root.right == null){
+            result = result + currSum;
+            
+        }
+        
+        order(root.left , currSum);
+        order(root.right , currSum);
+        }
+    }
+}
