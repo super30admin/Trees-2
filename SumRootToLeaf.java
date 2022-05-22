@@ -1,4 +1,4 @@
-// O(n) time || O(1) space 
+// O(n) time || O(h) space  - where h is the height of the tree
 class Solution {
   int rootToLeaf = 0;
 
