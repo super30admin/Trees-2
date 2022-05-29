@@ -1,3 +1,17 @@
+// Time Complexity : O(n) n nodes
+// Space Complexity : O(h) height of the tree
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
+Used two stacks to store the node and the current sum at that node and traverse through the tree in inorder traversal.
+when I met the leaf I popped the node I added the current sum to the global sum and afer the whole tree
+is traversed I returned the global sum.
+
+
+
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
