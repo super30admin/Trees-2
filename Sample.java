@@ -49,3 +49,54 @@ class Solution {
         helper(root.right,currentnum*10+root.val);
     }
 }
+//****SUM ROOT TO LEAF NUMBERS- ITERATIVE APPRAOCH****
+// Time Complexity :O(n)
+// Space Complexity :o(h)
+// Did this code successfully run on Leetcode :Y
+// Any problem you faced while coding this :
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        int result=0;
+        int currentnum=0;
+        //2 stacks
+        Stack<TreeNode> stack=new Stack<>();
+        Stack<Integer> nums=new Stack<>();
+        
+        while(root!=null || !stack.isEmpty())
+        {
+            while(root!=null)
+            {
+                //I can caluculate at this place itself for the currentsum
+                currentnum=currentnum*10+root.val;
+                stack.push(root);
+                nums.push(currentnum);
+                root=root.left;
+            }
+            root=stack.pop();
+            currentnum=nums.pop();
+            if(root.left==null && root.right==null)
+            {
+                
+                result+=currentnum;
+            }
+            root=root.right;
+        }
+     return result;   
+    }
+}
