@@ -1,4 +1,4 @@
-//****SUM ROOT TO LEAF NUMBERS****
+//****SUM ROOT TO LEAF NUMBERS- RECURSIVE APPRAOCH****
 // Time Complexity :O(n)
 // Space Complexity :o(h)
 // Did this code successfully run on Leetcode :Y
