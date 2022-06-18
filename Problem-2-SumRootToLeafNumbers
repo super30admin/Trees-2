@@ -1,0 +1,18 @@
+//TC , SC -O(n) , O(h) - h - height of tree
+class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        helper(root,0);
+        return sum;
+    }
+    private void helper(TreeNode root , int currNum)
+    {
+        if(root == null) return;
+        helper(root.left, currNum * 10 + root.val);
+        if(root.left == null && root.right == null)
+        {
+            sum += currNum * 10 + root.val;
+        }
+        helper(root.right, currNum * 10 + root.val);
+    }
+}
