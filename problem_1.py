@@ -37,6 +37,38 @@ check1 = Solution()
 print(check1.buildTree([40, 20, 50, 10, 60, 30], [40, 50, 20, 60, 30, 10]))
 
 
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+#
+# class Solution:
+#     def __init__(self):
+#         self.dictu = {}
+#
+#     def helper(self, postorder, start, end):
+#         if start > end:
+#             return
+#         root = postorder[self.length]
+#         rootNode = TreeNode(root)
+#         rootidx = self.dictu[root]
+#         self.length -= 1
+#         rootNode.right = self.helper(postorder, rootidx+1, end)
+#         rootNode.left = self.helper(postorder, start, rootidx-1)
+#         return rootNode
+#
+#     def buildTree(self, inorder: list[int], postorder: list[int]):
+#         for i in range(len(inorder)):
+#             self.dictu[inorder[i]] = i
+#         self.length = len(postorder)-1
+#         return self.helper(postorder, 0, len(inorder)-1)
+#
+#
+# check1 = Solution()
+# print(check1.buildTree([40, 20, 50, 10, 60, 30], [40, 50, 20, 60, 30, 10]))
+
 
 # # Using Recursion
 # # TC - O(n*n); SC - O(n*n)
