@@ -1,0 +1,32 @@
+//TC,SC - O(n),O(n)
+class Solution {
+    HashMap<Integer,Integer> hmap = new HashMap<>();
+    int idx;
+   // int len;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(postorder.length == 0) return null;
+        for(int i = 0 ; i < inorder.length ; i++)
+        {
+            hmap.put(inorder[i],i);
+        }
+        idx = inorder.length - 1;
+        return helper(postorder, 0 , inorder.length - 1);
+    }
+    
+    private TreeNode helper(int[] postorder , int start , int end)
+    {
+        if(start > end) return null;
+        int rootval = postorder[idx];
+        TreeNode root = new TreeNode(rootval);
+        idx--;
+        if (idx < 0)
+            return root;
+        
+        int rootIndex = hmap.get(rootval);
+        root.right = helper(postorder, rootIndex + 1 , end);
+        root.left = helper(postorder , start , rootIndex - 1);
+        
+        return root;
+    }
+    
+}
