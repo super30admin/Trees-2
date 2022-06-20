@@ -28,7 +28,7 @@ The root-to-leaf path 4->9->5 represents the number 495.
 The root-to-leaf path 4->9->1 represents the number 491.
 The root-to-leaf path 4->0 represents the number 40.
 Therefore, sum = 495 + 491 + 40 = 1026.
-
+Lecture- NA
 
 Constraints:
 The number of nodes in the tree is in the range [1, 1000].
