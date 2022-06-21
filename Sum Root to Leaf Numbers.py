@@ -1,5 +1,5 @@
 # time complexity is o(n), where n is the size of the input
-# space complexity is o(1)
+# space complexity is o(n), Recursive stack space
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
