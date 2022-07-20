@@ -1,0 +1,32 @@
+// Time Complexity: O(N), N = number of nodes in the tree
+// Space Complexity: O(N), N = number of nodes in the tree (hashmap + recursive stack space)
+
+class Solution {
+    Map<Integer, Integer> inorderMap;
+    int postIdx;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(postorder == null || postorder.length == 0)
+            return null;
+        
+        postIdx = postorder.length-1;
+        inorderMap = new HashMap<>();
+        for(int i = 0; i< inorder.length; i++) 
+            inorderMap.put(inorder[i], i);
+        
+        return helper(inorder, postorder, 0, inorder.length-1);
+    }
+    private TreeNode helper(int[] inorder, int[] postorder, int start, int end) {
+        // base case
+        if(start > end)
+            return null;
+        int rootVal = postorder[postIdx];
+        postIdx--;
+        TreeNode root = new TreeNode(rootVal);
+        int rootIdx = inorderMap.get(rootVal);
+        
+        root.right = helper(inorder, postorder, rootIdx+1, end);
+        root.left = helper(inorder, postorder, start, rootIdx-1);
+        
+        return root;
+    }
+}
