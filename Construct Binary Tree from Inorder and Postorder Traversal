@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        if not inorder or not postorder:
+            return None
+        r = postorder[-1]
+        inorder_r_i = inorder.index(r)
+        l_inorder = inorder[:inorder_r_i]
+        r_inorder = inorder[inorder_r_i + 1:]
+        l_postorder = postorder[:inorder_r_i]
+        r_postorder = postorder[inorder_r_i:-1]
+        r = TreeNode(r)
+        r.left = self.buildTree(l_inorder, l_postorder)
+        r.right = self.buildTree(r_inorder, r_postorder)
+        return r
+    
+# Time Complexity = O(2n)
+# Space Complexity = O(n)
+# Successfully implemented on Leetcode
