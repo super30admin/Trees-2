@@ -2,24 +2,27 @@
 //SpaceComplexity O(h)
 
 class Solution {
-    int sum;
-    
+    int sum = 0;
     public int sumNumbers(TreeNode root) {
         helper(root,0);
         return sum;
     }
-    private void helper(TreeNode root, int curr){
-       
-        if(root == null)return; 
+    
+    private void helper(TreeNode root, int prev){
         
-        curr = curr *10 + root.val;
+        if(root == null)return;
+        
+        int curr = root.val;
+        
+        prev = prev*10 + curr;
+       
+        helper(root.left,prev);
         
         if(root.left == null && root.right == null){
-            sum += curr;
+          
+            sum += prev;
         }
-        
-        
-        helper(root.left,curr);
-        helper(root.right,curr);
+                 
+        helper(root.right,prev);
     }
 }
