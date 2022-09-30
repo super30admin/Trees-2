@@ -1,5 +1,5 @@
-//TimeComplexity 
-//Spacecomplexity
+//TimeComplexity O(n)
+//Spacecomplexity O(n)
 
 class Solution {
     HashMap<Integer,Integer> map;
