@@ -1,0 +1,26 @@
+Time complexity = O(n)
+Space complexity = O(n)
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        
+        if len(postorder) == 0 or len(inorder)==0:
+            return None
+        #find the root from postorder traversal
+        root = TreeNode(postorder[-1])
+        rootidx = -1
+
+        for i in range(len(inorder)):
+            if inorder[i] == root.val:
+                rootidx = i
+        
+        #Create left subtree and right subtree      
+        inleft = inorder[:rootidx]
+        inright = inorder[rootidx + 1:]
+        postleft = postorder[:len(inleft)]
+        postright = postorder[rootidx:len(postorder)-1]
+
+        #build the left and right subtree
+        root.left = self.buildTree(inleft, postleft)
+        root.right = self.buildTree(inright, postright)
+
+        return root
