@@ -1,5 +1,5 @@
 // Time Complexity : O(n)
-// Space Complexity : O(inorder) , for storing the hashMap
+// Space Complexity : O(inorder) , for storing the hashMap, O (n) for storing the tree
 // Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this : creating the ranges were tough
 
@@ -7,33 +7,39 @@
 // Your code here along with comments explaining your approach
 
 /*
-we will take each element one by one from the preorder, as in pre order the root is first 
+ 
 
-we then go left and create a range on in order and go right by creating a range on inorder
+Post Order = Left -> right -> root, which means the last element would be root, and before that is right, and before that is Left
+
+We will start by taking each element from the end of the post order
+
+we will then go right and update the range for right
+
+we will then go left and update the range for left
  */
 class Solution {
 
+    int postIndex =0;
     HashMap<Integer,Integer> map;
-    int preIndex =0;
-
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        
         // we need to find the index of root in the inorder , so we will create a hashmap of that
 
         map = new HashMap<Integer,Integer>();
+        postIndex = postorder.length-1; // start from the last
 
         for(int i=0;i<inorder.length;i++){
             map.put(inorder[i],i);
         }
 
-        return helper(preorder,inorder,0,inorder.length-1);        
+        return helper(postorder,inorder,0,inorder.length-1); 
     }
 
-    private TreeNode helper(int[] preorder, int[] inorder,int start,int end){
+        private TreeNode helper(int[] postorder, int[] inorder,int start,int end){
 
 
         //base case
-        if(start > end || preIndex>=preorder.length){
+        if(start > end || postIndex<0){
             return null;
         }
 
@@ -41,7 +47,7 @@ class Solution {
         //logic
 
         // we will get the next element from protected
-        int rootVal = preorder[preIndex++];
+        int rootVal = postorder[postIndex--];
         TreeNode node = new TreeNode();
         node.val = rootVal;
 
@@ -49,12 +55,15 @@ class Solution {
 
 
         //recurse
-        // go left
-        node.left = helper(preorder,inorder,start,rootIndex-1); // traverse the left subtree, not incluing rootindex
-
+        // Post order = Left -> Right -> root
+        // Since we are at the root, we will go Right first and then left
         //go right
 
-        node.right = helper(preorder,inorder,rootIndex+1,end);// traverse the right subtree, not incluing rootindex
+        node.right = helper(postorder,inorder,rootIndex+1,end);// traverse the right subtree, not incluing rootindex
+
+         // go left
+          // Since we are at the root, we will go Right first and then left
+        node.left = helper(postorder,inorder,start,rootIndex-1); // traverse the left subtree, not incluing rootindex
         
         return node;
 
