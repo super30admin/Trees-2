@@ -21,13 +21,13 @@ public class BinTree_from_in_and_postOrder {
     TreeNode helper(int left, int right) {
 
         if (left > right) return null;
-        System.out.println("left = "+left+" right = "+right+" postIndex = "+postIndex);
+
         int rootVal = postorder[postIndex--];
         TreeNode root = new TreeNode(rootVal);
+        int index = inMap.get(rootVal);
 
-        root.left = helper(left, inMap.get(rootVal)-1);
-
-        root.right = helper(inMap.get(rootVal)+1, right);
+        root.right = helper(index+1, right);
+        root.left = helper(left, index-1);
 
         return root;
     }
