@@ -1,5 +1,5 @@
 // Time Complexity : O(n)
-// Space Complexity :O(1)
+// Space Complexity :O(n) // height of the tree
 
 /*
  * keep track of current sum and add that value 
