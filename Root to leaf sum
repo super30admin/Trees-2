@@ -1,0 +1,21 @@
+class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        helper(root, 0);
+        return sum;
+    }
+    
+    //T.C : O(n), S.C : O(h)
+    private void helper(TreeNode root, int currNum) {
+        if(root == null) return;
+        
+        currNum = currNum * 10 + root.val;
+        if(root.left == null && root.right == null) {
+            sum = sum + currNum;
+        }
+        
+        helper(root.left, currNum);
+        
+        helper(root.right, currNum);
+    }
+}
