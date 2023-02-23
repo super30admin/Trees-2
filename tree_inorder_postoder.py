@@ -1,5 +1,5 @@
 # Author: Naveen US
-# Titile: Construct Binary Tree from Inorder and Postorder Traversal
+# Title: Construct Binary Tree from Inorder and Postorder Traversal
 
 
 # Time complexity: O(n)
