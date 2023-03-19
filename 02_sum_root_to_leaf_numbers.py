@@ -1,7 +1,6 @@
 '''
 TC: O(n) to traverse all nodes
 SC: O(n) for recursive stack if all the nodes are present on the left of parent node or O(h) he is the height of binary tree
-
 '''
 
 class Solution:
