@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 /**
  * 
- * We do inorder traversal and at each point we check if the prev val in inorder traversal is always less than the current val. 
+ * We do know the the last element of postorder array is always the current root and we can deduce span of left and right subtree using inorder array.
+ * We use pointers to vary the low and high of both arrays and recursively construct first the right subtree and then the left subtree using the corresponding inorder and preorder arrays.
  * 
  * Time Complexity :
  * O(n) - where n is the no of nodes.
