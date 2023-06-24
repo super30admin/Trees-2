@@ -1,0 +1,27 @@
+129. Sum Root to Leaf Numbers
+
+class Solution {
+    int sum;
+    public int sumNumbers(TreeNode root) {
+       helper(root,0); 
+       return sum;
+    }
+    private void helper(TreeNode root,int currNum){
+        //base
+    if(root==null)return;
+        //logic
+        currNum=currNum*10+root.val;
+      //check if its a leaf node
+      if(root.left==null && root.right==null){
+        sum+=currNum;
+      }
+
+        helper(root.left,currNum);
+        helper(root.right,currNum);
+
+    }
+}
+
+
+
+
