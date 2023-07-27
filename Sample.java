@@ -6,6 +6,8 @@
 
 
 // Your code here along with comments explaining your approach
+//Approach: Inorder is Root Left Right vs PostOrder is Left Right Root, so postorder last element will be first root of the tree, all following roots can found out using postorder array. second last element will be root of right subtree and so on.
+// So we keep inorder elements in a hashmap to search for next subRoot in O(1) time. and form trees in recursive way. 
 class Solution {
     // int idx;
     // HashMap<Integer, Integer> map;
@@ -66,7 +68,10 @@ class Solution {
 // Any problem you faced while coding this : no problem
 
 
-// Your code here along with comments explaining your approach
+// Your code here along with comments explaining your approach 
+//Approach: Here we have to keep the sum from root to current node along with current Node: Means each node will bring its own Sum from root of tree, hence we keep that as a global variable
+// now we iteratively go over each node to keep its sum from root and to add it to result(sum of all root-leaf nodes.)
+// whenever we hit a leaf node, we add current Number of that node in result basically Sum root to leaf.
 class Solution {
     int result;
     //void based recursion
