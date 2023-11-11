@@ -1,32 +1,23 @@
+//Time Complexity  : O(n^2)
+//Space Complexity : O(n^2)
+
 class Solution {
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
-    if (inorder.length == 0 || postorder.length == 0) return null;
-    int ip = inorder.length - 1;
-    int pp = postorder.length - 1;
-    
-    Stack<TreeNode> stack = new Stack<TreeNode>();
-    TreeNode prev = null;
-    TreeNode root = new TreeNode(postorder[pp]);
-    stack.push(root);
-    pp--;
-    
-    while (pp >= 0) {
-        while (!stack.isEmpty() && stack.peek().val == inorder[ip]) {
-            prev = stack.pop();
-            ip--;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || preorder.length ==0) return null;
+        int rootVal = preorder[0];
+        TreeNode root = new TreeNode(rootVal);
+        int rootindex=-1;
+        for(int i=0; i< inorder.length; i++){
+            if(inorder[i]==rootVal){
+                rootindex = i;
+            }
         }
-        TreeNode newNode = new TreeNode(postorder[pp]);
-        if (prev != null) {
-            prev.left = newNode;
-        } else if (!stack.isEmpty()) {
-            TreeNode currTop = stack.peek();
-            currTop.right = newNode;
-        }
-        stack.push(newNode);
-        prev = null;
-        pp--;
+        int[] inLeft = Arrays.copyOfRange(inorder, 0, rootindex);
+        int[] inRight = Arrays.copyOfRange(inorder, rootindex +1, inorder.length);
+        int[] preLeft = Arrays.copyOfRange(preorder, 1,1+inLeft.length);
+        int[] preRight = Arrays.copyOfRange(preorder, 1+inLeft.length, preorder.length);
+        root.left = buildTree(preLeft, inLeft);
+        root.right = buildTree(preRight, inRight);
+        return root;
     }
-    
-    return root;
-}
 }
