@@ -1,5 +1,5 @@
 // Time Complexity : O(n) //recursion
-// Space Complexity : O(1)
+// Space Complexity : O(h) //recursive stack space max elements will be height og the tree
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : -
 //
