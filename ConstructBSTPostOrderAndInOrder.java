@@ -1,5 +1,5 @@
 // Time Complexity : O(n) n = number of nodes
-// Space Complexity : O(max(n, h)) 
+// Space Complexity : O(h) h = height of the tree 
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
