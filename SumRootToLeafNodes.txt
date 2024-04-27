@@ -1,0 +1,38 @@
+O(n): Time complexity
+O(h): Space complexity, where h is the height of the tree
+Challenges: Without calculating the interim value dont sum it to the total. This gives inaccurate results.
+Approach: Maintain the interimSum and when a node has no leaf nodes that would be end of the tree. Hence add interim value to total.
+Interim value is always previous value multipled by 10 + current value. Keep doing this calculation for left and right nodes from root.
+If the root node is null then return from the loop which would be base condition.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int total=0;
+    public int sumNumbers(TreeNode root) {        
+        calculateSum(root, 0);
+        return total;
+    }
+
+    public void calculateSum(TreeNode root, int interimValue){
+        if(root==null)   return;
+        interimValue=interimValue*10+root.val;                                            
+        calculateSum(root.left, interimValue);
+        calculateSum(root.right, interimValue);         
+        if(root.left==null && root.right==null)
+            total+=interimValue; 
+    }
+}

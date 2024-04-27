@@ -1,0 +1,43 @@
+//**** Optimized Approach  *****//
+Time Complexity: O(n): We are traversing each element only once with any extra copy.
+Space Complexity: O(n): HashMap takes O(n) space complexity and O(h) for Stack space.
+Challenges: Couldnt attain a solution if the chnage the order of recusion call for left and right. It should be right first and left next.
+Approach: Identify root element from postOrder traversal and get the index associated with it. 
+Inorder is always left-root-right. So get the left elements and right elements from Inorder traversal.
+Right part of the array is always index+1 till end.
+Left part of the array is always start till index-1 and 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    HashMap<Integer, Integer> hashmap= new HashMap<>();
+    int index=0;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+            index=postorder.length-1;
+            for(int i=0;i<inorder.length;i++)
+                hashmap.put(inorder[i], i);
+            return helper(postorder, 0, postorder.length-1);
+    }
+
+    public TreeNode helper(int[] postorder, int start, int end){
+        if(start>end) return null;      
+        TreeNode node= new TreeNode(postorder[index]);         
+        int indexValue=hashmap.get(postorder[index]); 
+        index--;         
+        node.right=helper(postorder, indexValue+1, end);     
+        node.left=helper(postorder, start, indexValue-1);               
+        return node;    
+    }
+}
