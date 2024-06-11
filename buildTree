@@ -1,0 +1,28 @@
+T.c --> O(n)
+S.c --> O(h)
+
+class Solution {
+    HashMap<Integer,Integer> map = new HashMap<>();
+    int idx ;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+     
+     for(int i =0; i<inorder.length; i++){
+        map.put(inorder[i],i);
+     }
+     idx = postorder.length-1;
+     return dfs(postorder,0,postorder.length-1); 
+    }
+    private TreeNode dfs(int[] postorder, int start, int end){
+        if(start > end){
+            return null;
+        }
+        int rootval = postorder[idx];
+        int rootidx = map.get(rootval);
+        TreeNode root = new TreeNode(rootval);
+        idx--;
+        root.right = dfs(postorder,rootidx+1,end); 
+        root.left = dfs(postorder,start,rootidx-1);
+        return root;        
+    }
+    
+}
