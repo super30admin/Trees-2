@@ -1,0 +1,28 @@
+// Time Complexity : worst case is O(n)
+// Space Complexity : O(h) where h is the height of the tree
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+// keep multiplying values down the tree. if it is a leaf node, add the value to the sum and return the value.
+
+class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        dfs(root, 0);
+        return sum;
+    }
+    private void dfs(TreeNode root, int number) {
+        if(root == null) {
+            return;
+        }
+        if(root.left == null && root.right == null) {
+            sum += (number * 10) + root.val;
+            return;
+        }
+        dfs(root.left, (number * 10) + root.val);
+        dfs(root.right, (number * 10) + root.val);
+    }
+}

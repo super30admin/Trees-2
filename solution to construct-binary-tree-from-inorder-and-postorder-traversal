@@ -1,0 +1,34 @@
+// Time Complexity : worst case is O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+// use hashmap to create the tree recursively
+
+class Solution {
+    HashMap<Integer, Integer> map;
+    int idx;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder == null || inorder.length == 0 || postorder == null || postorder.length == 0) {
+            return null;
+        }
+        map = new HashMap<>();
+        idx = postorder.length - 1;
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return recurse(inorder, postorder, 0, inorder.length - 1);
+    }   
+    private TreeNode recurse(int[] inorder, int[] postorder, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        int rootVal = postorder[idx];
+        idx--;
+        TreeNode root = new TreeNode(rootVal);
+        int rootIdx = map.get(rootVal);
+        root.right = recurse(inorder, postorder, rootIdx + 1, end);
+        root.left = recurse(inorder, postorder, start, rootIdx - 1);
+        return root;
+    }
+}
