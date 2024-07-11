@@ -1,0 +1,24 @@
+// Time Complexity : O(n)
+// Space Complexity : O(log n)
+
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return helper(root, 0);
+    }
+
+    private int helper(TreeNode root, int currNum){
+        //base
+        if(root== null)
+            return 0;
+        //logic
+
+        currNum = 10* currNum + root.val;
+        if(root.left == null && root.right == null)
+            return currNum;
+
+        int case1 = helper(root.left, currNum); 
+        int case2 = helper(root.right, currNum); 
+
+        return case1 + case2;
+    }
+}
