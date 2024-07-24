@@ -1,0 +1,49 @@
+#Problem 1
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        if len(inorder) == 0 or len(postorder) == 0:
+            return None
+        
+        root = TreeNode(postorder.pop())
+        mid = inorder.index(root.val)
+        root.right = self.buildTree(inorder[mid + 1 : ], postorder)
+        root.left = self.buildTree(inorder[: mid], postorder)
+
+        return root
+
+
+#Problem 2
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        if root == None:
+            return
+        
+        self.totalSum = 0
+
+        self.recurse(root, root.val)
+
+        return self.totalSum
+    
+    def recurse(self, root: Optional[TreeNode], currSum: int) -> None:
+        if root.left == None and root.right == None:
+            self.totalSum = self.totalSum + currSum
+            return
+        if root.left != None:
+            self.recurse(root.left, (currSum * 10)  + root.left.val)
+        if root.right != None:
+            self.recurse(root.right, (currSum * 10) + root.right.val)
