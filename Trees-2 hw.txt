@@ -1,0 +1,50 @@
+Trees-2
+
+
+Problem1 (https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+
+Time Complexity: O(n^2)
+Space Complexity: O(n)
+
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        if len(inorder) == 0 or len(postorder) == 0:
+            return None
+
+        root = TreeNode(postorder.pop())
+        mid = inorder.index(root.val)
+        root.right = self.buildTree(inorder[mid + 1 : ], postorder)
+        root.left = self.buildTree(inorder[: mid], postorder)
+
+        return root
+
+
+
+
+
+
+
+Problem2 (https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        if root == None:
+            return
+
+        self.totalSum = 0
+
+        self.recurse(root, root.val)
+
+        return self.totalSum
+
+    def recurse(self, root: Optional[TreeNode], currSum: int) -> None:
+        if root.left == None and root.right == None:
+            self.totalSum = self.totalSum + currSum
+            return
+        if root.left != None:
+            self.recurse(root.left, (currSum * 10)  + root.left.val)
+        if root.right != None:
+            self.recurse(root.right, (currSum * 10) + root.right.val)
