@@ -1,0 +1,68 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        if not inorder:
+            return None
+        root=TreeNode(postorder.pop())
+        idx=inorder.index(root.val)
+
+        root.right=self.buildTree(inorder[idx+1:],postorder)
+        root.left=self.buildTree(inorder[:idx],postorder)
+        return root
+    
+
+"""Notes: The above solution is of TC O(n**2)
+Two reasons: We are findig index of element in inorder (doing linear search) --> O(n)
+Next reason: We are creating subarray for building right and left subtree """
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+#Optimized - O(n)
+"""
+Hashmap Construction: 
+𝑂(𝑛)
+O(n) because it iterates through the inorder array once to build the hashmap.
+Tree Construction: The recursion visits each node once, and the hashmap lookup takes 
+𝑂(1)
+O(1) time for each node, resulting in an overall time complexity of 
+𝑂(𝑛)
+
+"""
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        # if not inorder:
+        #     return None
+        # root=TreeNode(postorder.pop())
+        # idx=inorder.index(root.val)
+
+        # root.right=self.buildTree(inorder[idx+1:],postorder)
+        # root.left=self.buildTree(inorder[:idx],postorder)
+        # return root
+        # inorderIdx={v,i for i,v in enumerate(inorder)}
+        inorderMap={}
+        for i in range(len(inorder)):
+            inorderMap[inorder[i]]=i
+
+        def helper(l,r):
+            if l> r:
+                return None
+            root=TreeNode(postorder.pop())
+            idx=inorderMap[root.val]
+            root.right=helper(idx+1,r)
+            root.left=helper(l,idx-1)
+
+            return root
+        root=helper(0,len(inorderMap)-1)
+        return root
