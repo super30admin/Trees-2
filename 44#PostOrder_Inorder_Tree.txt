@@ -1,0 +1,45 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :No
+
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        // start and end point of inorder and postorder array
+        int inStart = 0;
+        int inEnd = inorder.length - 1;
+        int postStart = 0;
+        int postEnd = postorder.length - 1;
+
+        return buildTree(inorder, inStart, inEnd, postorder, postStart, postEnd);
+    }
+ 
+    public TreeNode buildTree(int[] inorder, int inStart, int inEnd,
+            int[] postorder, int postStart, int postEnd) {
+        /* edge case */
+        if (inStart > inEnd || postStart > postEnd)
+            return null;
+        
+        /* postorder end is root */
+        int rootValue = postorder[postEnd];
+        TreeNode root = new TreeNode(rootValue);
+        /* find that value in inorder array */
+        int k = 0;
+        for (int i = 0; i < inorder.length; i++) {
+            if (inorder[i] == rootValue) {
+                k = i;
+                break;
+            }
+        }
+        
+        /* build right and left part of tree */
+        
+        root.left = buildTree(inorder, inStart, k - 1, postorder, postStart,
+                postStart + k - (inStart + 1));
+        // Becuase k is not the length, it it need to -(inStart+1) to get the length
+        root.right = buildTree(inorder, k + 1, inEnd, postorder, postStart + k- inStart, postEnd - 1);
+        // postStart+k-inStart = postStart+k-(inStart+1) +1
+
+        return root;
+    }
+}
