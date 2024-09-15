@@ -1,0 +1,93 @@
+/*
+
+Time Complexity: O(n);
+
+Space Complexity: O(n) because of recursive stack.
+
+Approach: handle left and right subtree seperately and add their sum.
+
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    
+    int helper(int number,TreeNode root)
+    {
+        //base case
+        
+        if(root==null) return 0;
+        
+        if(root.right==null&&root.left==null) return number*10+root.val;
+        
+        
+        number= number*10 +root.val;
+        
+       int result= helper(number,root.left) +helper(number,root.right);
+        
+        
+        return result;
+        
+    }
+    public int sumNumbers(TreeNode root) {
+        
+        return helper(0,root);
+    
+        /*
+        Stack<TreeNode> st = new Stack<>();
+        
+        String number="";
+        int sum=0;
+        
+        while(root!=null||st.size()>0)
+        {
+            
+            
+        while(root.left!=null)
+        {
+            // System.out.println(number+ "  and the sume is  "+sum);
+            st.push(root);
+            number=number+Integer.toString(root.val);
+            root=root.left;
+        }
+    //    st.push(root);
+        number=number+Integer.toString(root.val);
+        if(root.right==null&&number.length()>0)
+        {
+            
+            sum+=Integer.parseInt(number);
+            number=number.substring(0,number.length()-1);
+            System.out.println(number+ "  and the sume is  "+sum);
+            
+        }
+        while(st.size()>0&&root.right==null)
+        {
+            root=st.pop();
+            number=number.substring(0,number.length()-1);
+            System.out.println(root.val + " and this is the number "+number);
+        }
+        
+   //     st.push(root);
+   //      number=number.substring(0,number.length()-1);
+             number=number+Integer.toString(root.val);
+             root=root.right;
+        
+        }
+        
+    //    System.out.println( "  and the sume is  "+sum);
+        return sum;
+        
+        
+        */
+    }
+    
+ 
+}
