@@ -1,0 +1,43 @@
+Time Complexity: O(m+n) where m= Number of nodes from tree, n = number of edges from the tree
+Space complexity: O(h) h = max height of the tree
+Did this code successfully submitted on leetcode: Yes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int global_sum=0;
+    
+    public int sumNumbers(TreeNode root) {
+        cal(root,0);
+        
+        return global_sum;
+    }
+    
+    private void cal(TreeNode root, int currSum){
+        
+        //base case
+        if(root==null){
+            return;
+        }
+        
+        //base
+        if(root.left == null && root.right == null){
+            currSum += root.val;
+            global_sum += currSum;
+        }
+        
+        //recursion
+        int posting_sum =  (root.val+currSum)*10;
+        
+        cal(root.left,posting_sum);
+        cal(root.right,posting_sum);
+        
+    }
+}
