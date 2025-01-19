@@ -35,7 +35,7 @@ public class SumRootLeaf {
             return;
         }
 
-        curSum = curSum + root.val;
+        curSum = curSum*10 + root.val;
         dfs(root.left, curSum);
         dfs(root.right, curSum);
         if(root.left == null && root.right == null) {
