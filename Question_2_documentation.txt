@@ -1,0 +1,8 @@
+Time Complexity : O(n)
+Space Complexity : O(h)
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+
+
+Your code here along with comments explaining your approach in three sentences only
+Used post order traversal to traverse to each node and kept on accumulating the number from root to that node. If the leaf is a node, then the accumulated number is added to a global varible, which maintains the sum of numbers from all paths from root to leaves and return the number after an entire postorder traversal is performed on the tree.
