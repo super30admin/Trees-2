@@ -1,0 +1,25 @@
+class Solution {
+    Map<Integer,Integer> imap ;
+    int idx;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        imap = new HashMap<>();
+        // populate the indexes
+        for(int i=0; i< inorder.length; i ++){
+            imap.put(inorder[i],i);
+        }
+        idx = postorder.length-1;
+        return helper(postorder,0,inorder.length-1);
+    }
+    private TreeNode helper(int[] postorder, int start, int end){    
+        
+        //base
+        if(start > end) return null;
+        //logic
+        int rootVal = postorder[idx];
+        TreeNode root = new TreeNode(rootVal);
+        idx--;
+        root.right = helper(postorder, imap.get(rootVal)+1, end);
+        root.left = helper(postorder, start, imap.get(rootVal)-1);
+        return root;
+    }
+}

@@ -1,0 +1,24 @@
+class Solution {
+    int totalSum;
+    public int sumNumbers(TreeNode root) {
+        totalSum = 0;
+        rootToLeafSum(root, 0);
+        return totalSum;
+    }
+    //helper function
+    private void rootToLeafSum(TreeNode root, int sum){
+        // base 
+        if(root == null) return ;
+        //logic 
+        //root calculations
+        sum = (sum * 10) + root.val;
+            //sum  determination 
+            if(root.left == null && root.right == null ){
+                totalSum += sum;
+            }
+        // left 
+            rootToLeafSum(root.left, sum);
+        // right 
+            rootToLeafSum(root.right, sum);
+    } 
+}
