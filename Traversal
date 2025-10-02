@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+// TC - O(n)
+// SC - O(n)
+
+//We do preorder traversal and then make the right subtree.
+class Traversal {
+    
+    int index;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < inorder.length; i++){
+            map.put(inorder[i], i);
+        }
+        this.index = 0;
+        return buildTree(preorder, 0, preorder.length - 1, map);
+    }
+
+    private TreeNode buildTree(int[] preorder, int start, int end, HashMap<Integer, Integer> map){
+        // base case
+        if(start > end) return null;
+
+        int rootVal = preorder[index];
+        index++;
+
+        int rootindex = map.get(rootVal);
+
+        TreeNode root = new TreeNode(rootVal);
+
+        root.left = buildTree(preorder, start, rootindex - 1, map);
+        root.right = buildTree(preorder, rootindex + 1, end, map);
+        
+        return root;
+    }
+}
