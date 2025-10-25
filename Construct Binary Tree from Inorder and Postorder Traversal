@@ -1,0 +1,52 @@
+//We're building the tree from the end of postorder, since the last element is always the root.
+// We find the root in the inorder array to split into left and right subtrees.
+// Recursively build right first, then left (since we’re moving backwards in postorder).
+
+// time o(n)
+// space o(n)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    HashMap<Integer,Integer> map;
+    int postOrderIdx;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        
+        this.map = new HashMap<>();
+        postOrderIdx = postorder.length-1;
+
+        for(int i=0; i<inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        return helper(postorder,0,inorder.length-1);
+    }
+
+    private TreeNode helper(int[] postorder, int start, int end){
+
+        if(start > end) return null;
+
+        int rootVal = postorder[postOrderIdx];
+        int rootIdx = map.get(rootVal);
+        postOrderIdx--;
+
+        TreeNode node = new TreeNode(rootVal);
+
+        node.right = helper(postorder,rootIdx+1,end);
+        node.left = helper(postorder,start,rootIdx-1);
+      
+        return node;
+    }   
+}
