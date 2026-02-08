@@ -1,0 +1,34 @@
+//TC :- O(n)
+ //SC:- O(h)
+
+ 
+class Solution {
+    int xsum = 0;
+
+    public int sumNumbers(TreeNode root) {
+        if (root == null)
+            return xsum;
+        helper(root, 0);
+        return xsum;
+
+    }
+
+    private void helper(TreeNode root, int sum) {
+        if (root == null) {
+          
+            return;
+        }
+        sum=10 * sum + root.val;
+        if (root.left == null && root.right == null) {
+            
+            xsum = xsum + sum;
+        }
+      
+        helper(root.left, sum);
+
+       
+        helper(root.right, sum);
+
+      
+    }
+}
