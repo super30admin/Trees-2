@@ -1,0 +1,46 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+//Approach: Recurse through left and right nodes and build the currSum in local scope, Add to the result at the leaf node.
+//Time Complexity: O(n)
+//Space Complexity: O(n)
+class SumRootToLeaf {
+    int result;
+    public int sumNumbers(TreeNode root) {
+
+        helper(root, 0);
+        return result;
+    }
+
+    private void helper(TreeNode root, int currSum)
+    {
+        //Base case
+        if (root == null) return;
+
+        // Build the currSum
+        currSum = currSum * 10 + root.val;
+
+        //At leaf node add the currSum to result    
+        if (root.left == null && root.right == null)
+        {
+            result+= currSum;
+        }
+
+        //Recursion
+        helper(root.left, currSum);
+
+        helper(root.right, currSum);
+    }
+}
