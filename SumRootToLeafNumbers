@@ -1,0 +1,114 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    class Pair {
+        TreeNode node;
+        int sum;
+
+        Pair(TreeNode node, int sum) {
+            this.node = node;
+            this.sum = sum;
+        }
+
+        public TreeNode getNode() {
+            return node;
+        }
+
+        public int getSum() {
+            return sum;
+        }
+    }
+
+    int totalSum;
+
+    public int sumNumbers(TreeNode root) {
+        //return sumNumbersIterative(root);
+        /*this.totalSum =0;
+        helper(root, 0);
+        return totalSum;*/
+        return intBasedRecursion(root, 0);
+
+    }
+
+    /**
+    Recursive Approach: Using void-based recursive helper to build numbers from root to leaf by multiplying the current number by 10 and adding the node value.
+    
+    When we hit a leaf node, we add the current sum to the result since it represents a full root-to-leaf path. The recursion continues down left and right children, accumulating the total sum along the way.
+    Here result is calculated in pre-order manner. It can also be accumulated in in-order or post-order manner.
+    
+    Time :O(N)
+    Space: O(h) where h is the height of the tree.
+     */
+    void helper(TreeNode root, int currSum) {
+        //base
+        if (root == null)
+            return;
+
+        //logic
+        currSum = currSum * 10 + root.val;
+        if (root.left == null && root.right == null) {
+            totalSum += currSum;
+        }
+        //recurse
+        helper(root.left, currSum);
+        helper(root.right, currSum);
+
+    }
+
+    int intBasedRecursion(TreeNode root, int currSum) {
+        //base
+        if (root == null)
+            return 0;
+
+        //logic
+        currSum = currSum * 10 + root.val;
+        if (root.left == null && root.right == null) {
+            return currSum;
+        }
+        //recurse
+        int left = intBasedRecursion(root.left, currSum);
+        int right = intBasedRecursion(root.right, currSum);
+        return left + right;
+
+    }
+
+    public int sumNumbersIterative(TreeNode root) {
+        //Use in order traversal. with each node store the sum till that node.
+
+        TreeNode curr = root;
+        Stack<Pair> stack = new Stack<>();
+        int result = 0;
+        int localSum = 0;
+        while (!stack.isEmpty() || curr != null) {
+            while (curr != null) {
+                localSum = localSum * 10 + curr.val;
+                stack.push(new Pair(curr, localSum));
+                curr = curr.left;
+            }
+
+            Pair pair = stack.pop();
+            curr = pair.getNode();
+            if (curr.left == null && curr.right == null) {
+                result = result + pair.getSum();
+            }
+            localSum = pair.getSum();
+            curr = curr.right;
+        }
+        return result;
+
+    }
+
+}

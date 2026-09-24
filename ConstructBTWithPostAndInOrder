@@ -1,0 +1,76 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+ /**
+     * Approach: the idea is take root from postorder[]. search that root inside inorder[]. all the elements to the left in inorder[] will be left subtree and right elements will be right subtree. Do this recursively.
+     - In order to search root element in inorder[] we are using hashmap.
+    */
+
+    /*Time Complexity: O(N)
+    HashMap Construction: We iterate through the inorder array of size N exactly once to populate the HashMap. This takes O(N) time.
+    
+    Tree Construction (Recursion): Eecursive helper function processes every node exactly once (tracked by the global idx moving from  N-1 to 0). Inside the function, looking up the index in the HashMap and creating a new node both take O(1) time. Therefore, building the tree takes O(N) time.
+    
+    Total Time: O(N) + O(N) = O(N).
+    
+    */
+
+    /*
+    Space Complexity: O(N)
+    - The HashMap: Storing all N nodes and their indices takes O(N) space.
+    - The Call Stack (Implicit Space): Because this is a recursive solution, the system uses the call stack to   manage the function calls. The maximum depth of this stack is equal to the height of the tree (H).
+    - In the worst-case scenario (a completely skewed tree, like a linked list), the call stack will go N levels deep, taking O(N) space.
+    - In the best-case scenario (a perfectly balanced tree), the call stack takes O(log N) space.
+    */
+class Solution {
+    //this index is on postorder array;
+    int idx;
+    Map<Integer, Integer> map;
+
+    //inorder -> left- root-right.
+    //postorder -> left- right- root.
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        this.idx = postorder.length - 1;
+        map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+
+        return helper(0, inorder.length - 1, postorder);
+    }
+
+    private TreeNode helper(int inStart, int inEnd, int[] postorder) {
+        //1. base
+        if (inStart > inEnd)
+            return null;
+
+        //2. logic
+        int rootVal = postorder[idx];
+        TreeNode root = new TreeNode(rootVal);
+        idx--;
+
+        //3. recurse
+        int rootIdx = map.get(rootVal);
+
+        //create right subtree
+        root.right = helper(rootIdx + 1, inEnd, postorder);
+
+        //create Left subtree
+        root.left = helper(inStart, rootIdx - 1, postorder);
+        return root;
+
+    }
+}
